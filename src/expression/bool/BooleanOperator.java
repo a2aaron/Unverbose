@@ -1,6 +1,6 @@
 package expression.bool;
 
-import expression.Expression;
+import expression.IExpression;
 import expression.IExpression;
 import expression.Operator;
 import types.BooleanType;
@@ -11,7 +11,7 @@ public interface BooleanOperator extends Operator<BooleanType, BooleanType, Bool
 	}
 
 	@Override
-	public default Expression<BooleanType> apply(IExpression<BooleanType> left, IExpression<BooleanType> right) {
+	public default IExpression<BooleanType> apply(IExpression<BooleanType> left, IExpression<BooleanType> right) {
 		boolean result = apply(left.getType().getValue().booleanValue(), right.getType().getValue().booleanValue());
 		return BooleanHelper.toExpression(new BooleanType(result));
 	}

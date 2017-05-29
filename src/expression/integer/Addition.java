@@ -1,6 +1,6 @@
 package expression.integer;
 
-import expression.Expression;
+import expression.IExpression;
 import expression.ExpressionTwoOp;
 import expression.Operator;
 import types.IntegerType;
@@ -19,7 +19,7 @@ public class Addition extends ExpressionTwoOp<IntegerType, IntegerType, IntegerT
         }
 	};
 
-	public Addition(Expression<IntegerType> left, Expression<IntegerType> right) {
+	public Addition(IExpression<IntegerType> left, IExpression<IntegerType> right) {
 		super(left, right, operator, "+");
 	}
 

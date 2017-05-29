@@ -3,7 +3,7 @@ package execution.flow;
 import java.util.ArrayList;
 
 import execution.CodeBlock;
-import expression.Expression;
+import expression.IExpression;
 import expression.bool.BooleanHelper;
 import types.BooleanType;
 
@@ -14,11 +14,11 @@ import types.BooleanType;
  * @version (a version number or a date)
  */
 public class WhileLoop extends FlowControl {
-	public WhileLoop(Expression<BooleanType> condition, ArrayList<CodeBlock> codeBlock) {
-		super("while", condition, codeBlock);
-	}
+    public WhileLoop(IExpression<BooleanType> condition, ArrayList<CodeBlock> codeBlock) {
+        super("while", condition, codeBlock);
+    }
 
-	public static WhileLoop random() {
-		return new WhileLoop(BooleanHelper.random(), CodeBlock.randomArrayList());
-	}
+    public static WhileLoop random() {
+        return new WhileLoop(BooleanHelper.random(), CodeBlock.randomArrayList());
+    }
 }

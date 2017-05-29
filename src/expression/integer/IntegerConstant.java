@@ -1,6 +1,7 @@
 package expression.integer;
 
 import expression.Expression;
+import expression.IExpression;
 import types.IntegerType;
 
 /**
@@ -15,12 +16,12 @@ public class IntegerConstant extends Expression<IntegerType> {
 	}
 
 	@Override
-	public Expression<IntegerType> complicate() {
+	public IExpression<IntegerType> complicate() {
 		return Addition.random(this.getType());
 	}
 
 	@Override
-	public Expression<IntegerType> evaluate() {
+	public IExpression<IntegerType> evaluate() {
 		return this;
 	}
 

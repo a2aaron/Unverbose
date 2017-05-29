@@ -1,6 +1,5 @@
 package types;
 
-import expression.IExpression;
 import values.NullValue;
 import values.UnassignedNullValue;
 
@@ -10,75 +9,58 @@ import values.UnassignedNullValue;
  * 
  * T is the underlying value of the Type
  */
-class Type<T extends Object> implements IType<T>, IExpression<IType<?>> {
-	T value;
-	String name;
-	NullValue nullValue;
+class Type<T extends Object> implements IType<T> {
+    String name;
+    T value;
+    NullValue nullValue;
+    
+    /**
+     * 
+     * @param name
+     *            the name of this type (like "int") Sets the nullValue paramter
+     *            to UnassignedNullValue
+     */
+    public Type(String name, T value) {
+        this.name = name;
+        this.value = value;
+        if (value == null) {
+            nullValue = new NullValue();
+        }
+    }
+    
+    public Type(String name) {
+        this.name = name;
+        if (value == null) {
+            nullValue = new UnassignedNullValue();
+        }
+    }
+    
+    @Override
+    public T getValue() {
+        return value;
+    }
+    
+    @Override
+    public void setValue(T value) {
+        this.value = value;
+    }
+    
+    public NullValue getNullValue() {
+        return nullValue;
+    }
 
-	/**
-	 * 
-	 * @param name
-	 *            the name of this type (like "int") Sets the nullValue paramter
-	 *            to UnassignedNullValue
-	 */
-	public Type(String name) {
-		this.name = name;
-		this.value = null;
-		this.nullValue = new UnassignedNullValue();
-	}
-
-	/**
-	 * 
-	 * @param name
-	 *            the name of this type (like "int")
-	 * @param value
-	 *            the value of this type (like "4") If value is null, then the
-	 *            NullValue parameter is set to NullValue
-	 */
-	public Type(String name, T value) {
-		this.name = name;
-		this.value = value;
-		if (value == null) {
-			nullValue = new NullValue();
-		}
-	}
-
-	@Override
-	public IExpression<IType<?>> evaluate() {
-		return this;
-	}
-
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	@Override
-	public Type<?> getType() {
-		return this;
-	}
-
-	@Override
-	public Object getValue() {
-		if (value == null) {
-			return nullValue;
-		} else {
-			return value;
-		}
-	}
-
-	@Override
+    @Override
     public void setNullValue(NullValue nullValue) {
-		this.nullValue = nullValue;
-	}
+        this.nullValue = nullValue;
+    }
 
-	@Override
-	public void setValue(T value) {
-		this.value = value;
-	}
+    @Override
+    public String getName() {
+        return name;
+    }
 
-	@Override
-	public String toString() {
-		return getName() + " | " + getValue().toString();
-	}
+    @Override
+    public String toString() {
+        return getName();
+    }
 }

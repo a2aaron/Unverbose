@@ -14,5 +14,5 @@ import types.IType;
  *            The returned value
  */
 public interface Operator<L extends IType<?>, R extends IType<?>, T extends IType<?>> {
-	public Expression<T> apply(IExpression<L> left, IExpression<R> right);
+	public IExpression<T> apply(IExpression<L> left, IExpression<R> right);
 }

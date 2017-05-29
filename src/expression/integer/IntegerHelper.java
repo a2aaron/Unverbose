@@ -1,6 +1,6 @@
 package expression.integer;
 
-import expression.Expression;
+import expression.IExpression;
 import types.IntegerType;
 
 /**
@@ -10,11 +10,11 @@ import types.IntegerType;
  * @version (a version number or a date)
  */
 public class IntegerHelper {
-	public static Expression<IntegerType> toExpression(int value) {
+	public static IExpression<IntegerType> toExpression(int value) {
 		return new IntegerConstant(new IntegerType(value));
 	}
 
-	public static Expression<IntegerType> toExpression(IntegerType value) {
+	public static IExpression<IntegerType> toExpression(IntegerType value) {
 		return new IntegerConstant(value);
 	}
 }

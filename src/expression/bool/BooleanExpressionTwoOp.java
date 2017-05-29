@@ -1,12 +1,12 @@
 package expression.bool;
 
-import expression.Expression;
+import expression.IExpression;
 import expression.ExpressionTwoOp;
 import types.BooleanType;
 
 public class BooleanExpressionTwoOp extends ExpressionTwoOp<BooleanType, BooleanType, BooleanType> {
     @Deprecated
-    public BooleanExpressionTwoOp(Expression<BooleanType> left, Expression<BooleanType> right, BooleanOperator operator, String symbol) {
+    public BooleanExpressionTwoOp(IExpression<BooleanType> left, IExpression<BooleanType> right, BooleanOperator operator, String symbol) {
         super(left, right, operator, symbol);
     }
     

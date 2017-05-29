@@ -12,12 +12,12 @@ public class ExpressionVariable<T extends IType<?>> extends Expression<T> {
 	}
 
 	@Override
-	public Expression<T> complicate() {
+	public IExpression<T> complicate() {
 		throw new RuntimeException("TODO");
 	}
 
 	@Override
-	public Expression<T> evaluate() {
+	public IExpression<T> evaluate() {
 		throw new RuntimeException("TODO");
 	}
 

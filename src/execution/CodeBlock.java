@@ -2,7 +2,7 @@ package execution;
 
 import java.util.ArrayList;
 
-import expression.Expression;
+import expression.IExpression;
 import helper.Helper;
 import types.IType;
 import variables.LocalVariable;
@@ -24,13 +24,13 @@ public abstract class CodeBlock {
             if (!scope.isEmpty()) {
                 Variable<?> variable = (Variable<?>) Helper.getRandomElement(scope.toArray());
                 return new Assignment(variable,
-                        Expression.random((Class<? extends IType<?>>) variable.getSignature().getType().getClass()));
+                        IExpression.random((Class<? extends IType<?>>) variable.getSignature().getType().getClass()));
             }
 		case 1:
             if (!scope.isEmpty()) {
                 Variable<?> variable = LocalVariable.random();
                 return new DeclarationAssignment(variable,
-                        Expression.random((Class<? extends IType<?>>) variable.getSignature().getType().getClass()));
+                        IExpression.random((Class<? extends IType<?>>) variable.getSignature().getType().getClass()));
             }
 		case 2:
 			return Declaration.random(IType.randomClass());

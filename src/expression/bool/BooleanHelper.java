@@ -1,6 +1,6 @@
 package expression.bool;
 
-import expression.Expression;
+import expression.IExpression;
 import types.BooleanType;
 
 /**
@@ -10,15 +10,15 @@ import types.BooleanType;
  * @version (a version number or a date)
  */
 public class BooleanHelper {
-	public static Expression<BooleanType> random() {
+	public static IExpression<BooleanType> random() {
 		return BooleanConstant.random();
 	}
 
-    public static Expression<BooleanType> toExpression(boolean value) {
+    public static IExpression<BooleanType> toExpression(boolean value) {
         return toExpression(new BooleanType(value));
     }	
 	
-	public static Expression<BooleanType> toExpression(BooleanType value) {
+	public static IExpression<BooleanType> toExpression(BooleanType value) {
 		if (value.getValue().booleanValue() == true) {
 			return new BooleanConstant(true);
 		} else {

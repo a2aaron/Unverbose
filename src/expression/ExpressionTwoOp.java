@@ -9,13 +9,13 @@ import types.IType;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class ExpressionTwoOp<L extends IType<?>, R extends IType<?>, T extends IType<?>> extends Expression<T> {
-	Expression<L> left;
-	Expression<R> right;
+public class ExpressionTwoOp<L extends IType<?>, R extends IType<?>, T extends IType<?>> implements IExpression<T> {
+	IExpression<L> left;
+	IExpression<R> right;
 	Operator<L, R, T> operator;
 	String symbol;
 
-	public ExpressionTwoOp(Expression<L> left, Expression<R> right, Operator<L, R, T> operator, String symbol) {
+	public ExpressionTwoOp(IExpression<L> left, IExpression<R> right, Operator<L, R, T> operator, String symbol) {
 		this.left = left;
 		this.right = right;
 		this.symbol = symbol;
@@ -23,11 +23,11 @@ public class ExpressionTwoOp<L extends IType<?>, R extends IType<?>, T extends I
 	}
 
 	@Override
-	public Expression<T> complicate() {
+	public IExpression<T> complicate() {
 		switch (Helper.randomInt(0, 1)) {
 		case 0: {
-			Expression<L> newLeft = left;
-			Expression<R> newRight = right;
+			IExpression<L> newLeft = left;
+			IExpression<R> newRight = right;
 			if (Helper.random.nextBoolean()) {
 				newLeft = left.complicate();
 			}
@@ -47,15 +47,15 @@ public class ExpressionTwoOp<L extends IType<?>, R extends IType<?>, T extends I
 	}
 
 	@Override
-	public Expression<T> evaluate() {
+	public IExpression<T> evaluate() {
 		return operator.apply(this.left, this.right);
 	}
 
-	public Expression<L> getLeft() {
+	public IExpression<L> getLeft() {
 		return left;
 	}
 
-	public Expression<R> getRight() {
+	public IExpression<R> getRight() {
 		return right;
 	}
 
@@ -76,11 +76,11 @@ public class ExpressionTwoOp<L extends IType<?>, R extends IType<?>, T extends I
 	}
 }
 /*
- * An Expression is a type which takes a value and can be evaluated to return
- * that value It has type Expression<T extends Value>
+ * An IExpression is a type which takes a value and can be evaluated to return
+ * that value It has type IExpression<T extends Value>
  * 
  * A TwoOpExpression is a type which takes an Operator and two Expressions<T
- * extends Value> and can return another Expression<T>. Thus, it has type
+ * extends Value> and can return another IExpression<T>. Thus, it has type
  * TwoOpExpression<T extends Value> and is also an expression
  * 
  * An Operator is NOT an expression. It is the logic for a TwoOpExpression,

@@ -2,7 +2,7 @@ package helper;
 
 import java.util.ArrayList;
 
-import expression.Expression;
+import expression.IExpression;
 import expression.bool.BooleanConstant;
 import expression.integer.IntegerConstant;
 import types.BooleanType;
@@ -11,12 +11,12 @@ import types.IntegerType;
 import variables.Variable;
 
 public class ExpressionGenerator {
-    public static <T extends IType<?>> Expression<T> random(Class<T> clazz) {
-        Expression<T> expression = null;
+    public static <T extends IType<?>> IExpression<T> random(Class<T> clazz) {
+        IExpression<T> expression = null;
         if (clazz.equals(BooleanType.class)) {
-            expression = (Expression<T>) BooleanConstant.random();
+            expression = (IExpression<T>) BooleanConstant.random();
         } else if (clazz.equals(IntegerType.class)) {
-            expression = (Expression<T>) IntegerConstant.random();
+            expression = (IExpression<T>) IntegerConstant.random();
         } else {
             throw new RuntimeException("Unreachable!");
         }

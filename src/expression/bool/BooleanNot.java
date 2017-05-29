@@ -1,7 +1,7 @@
 package expression.bool;
 
-import expression.Expression;
 import expression.ExpressionOneOp;
+import expression.IExpression;
 import expression.OneOpOperator;
 import helper.Helper;
 import types.BooleanType;
@@ -13,54 +13,54 @@ import types.BooleanType;
  * @version (a version number or a date)
  */
 public class BooleanNot extends ExpressionOneOp<BooleanType, BooleanType> {
-	static OneOpOperator<BooleanType, BooleanType> operator = new OneOpOperator<BooleanType, BooleanType>() {
-		@Override
-		public Expression<BooleanType> apply(Expression<BooleanType> expression) {
-			if (expression.evaluate().getType().getValue().booleanValue() == true) {
-				return new BooleanConstant(false);
-			} else {
-				return new BooleanConstant(true);
-			}
-		}
-	};
+    static OneOpOperator<BooleanType, BooleanType> operator = new OneOpOperator<BooleanType, BooleanType>() {
+        @Override
+        public IExpression<BooleanType> apply(IExpression<BooleanType> expression) {
+            if (expression.evaluate().getType().getValue().booleanValue() == true) {
+                return new BooleanConstant(false);
+            } else {
+                return new BooleanConstant(true);
+            }
+        }
+    };
 
-	public BooleanNot(Expression<BooleanType> expression) {
-		super(expression, operator);
-	}
-	
-	@Override
-	public Expression<BooleanType> complicate() {
-		switch (Helper.randomInt(0, 2)) {
-		case 0:
-		case 1:
-			Expression<BooleanType> newExpression = expression.complicate();
-			return new BooleanNot(newExpression);
+    public BooleanNot(IExpression<BooleanType> expression) {
+        super(expression, operator);
+    }
 
-		// return super.complicate();
-		default:
-			throw new RuntimeException("Unreachable!");
-		}
-	}
+    @Override
+    public IExpression<BooleanType> complicate() {
+        switch (Helper.randomInt(0, 2)) {
+        case 0:
+        case 1:
+            IExpression<BooleanType> newExpression = expression.complicate();
+            return new BooleanNot(newExpression);
 
-	@Override
-	public String toString() {
-		if (expression instanceof BooleanConstant) {
-			return "!" + expression.toString();
-		} else {
-			return "!(" + expression.toString() + ")";
-		}
-	}
+        // return super.complicate();
+        default:
+            throw new RuntimeException("Unreachable!");
+        }
+    }
 
-	public static Expression<BooleanType> randomFalse() {
-		return new BooleanNot(new BooleanConstant(true));
-	}
+    @Override
+    public String toString() {
+        if (expression instanceof BooleanConstant) {
+            return "!" + expression.toString();
+        } else {
+            return "!(" + expression.toString() + ")";
+        }
+    }
 
-	public static Expression<BooleanType> randomTrue() {
-		return new BooleanNot(new BooleanConstant(false));
-	}
+    public static IExpression<BooleanType> randomFalse() {
+        return new BooleanNot(new BooleanConstant(true));
+    }
 
-    public static Expression<BooleanType> randomEqualTo(BooleanType type) {
-        if (type.getValue().booleanValue()) {
+    public static IExpression<BooleanType> randomTrue() {
+        return new BooleanNot(new BooleanConstant(false));
+    }
+
+    public static IExpression<BooleanType > randomEqualTo(boolean value) {
+        if (value) {
             return randomTrue();
         } else {
             return randomFalse();

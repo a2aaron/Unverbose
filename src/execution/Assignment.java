@@ -2,16 +2,16 @@ package execution;
 
 import java.util.ArrayList;
 
-import expression.Expression;
+import expression.IExpression;
 import types.IType;
 import variables.Variable;
 
 public class Assignment<T extends IType<?>> extends CodeBlock {
 
 	Variable<T> variable;
-	Expression<T> expression;
+	IExpression<T> expression;
 
-	public Assignment(Variable<T> variable, Expression<T> expression) {
+	public Assignment(Variable<T> variable, IExpression<T> expression) {
 		this.variable = variable;
 		this.expression = expression;
 	}

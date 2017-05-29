@@ -13,19 +13,19 @@ import types.IType;
  *            The returned value
  */
 public class ExpressionOneOp<In extends IType<?>, Out extends IType<?>> extends Expression<Out> {
-	protected Expression<In> expression;
+	protected IExpression<In> expression;
 	OneOpOperator<In, Out> operator;
 
-	public ExpressionOneOp(Expression<In> expression, OneOpOperator<In, Out> operator) {
+	public ExpressionOneOp(IExpression<In> expression, OneOpOperator<In, Out> operator) {
 		this.expression = expression;
 		this.operator = operator;
 	}
 
 	@Override
-	public Expression<Out> complicate() {
+	public IExpression<Out> complicate() {
 		switch (Helper.randomInt(0, 1)) {
 		case 0: {
-			Expression<In> newExpression = expression.complicate();
+			IExpression<In> newExpression = expression.complicate();
 			return new ExpressionOneOp<In, Out>(newExpression, operator);
 		}
 		case 1:
@@ -38,7 +38,7 @@ public class ExpressionOneOp<In extends IType<?>, Out extends IType<?>> extends 
 	}
 
 	@Override
-	public Expression<Out> evaluate() {
+	public IExpression<Out> evaluate() {
 		return operator.apply(expression);
 	}
 

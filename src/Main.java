@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 import execution.CodeBlock;
 import execution.DeclarationAssignment;
-import expression.Expression;
+import expression.IExpression;
 import expression.bool.BooleanConstant;
 import function.Function;
 import function.Getter;

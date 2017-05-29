@@ -1,6 +1,6 @@
 package expression.bool;
 
-import expression.Expression;
+import expression.IExpression;
 import expression.ExpressionConstant;
 import helper.Helper;
 import types.BooleanType;
@@ -20,13 +20,13 @@ public class BooleanConstant extends ExpressionConstant<BooleanType> {
 		super(value);
 	}
 
-	public static Expression<BooleanType> random() {
+	public static IExpression<BooleanType> random() {
 		return BooleanHelper.toExpression(types.BooleanType.random());
 	}
 
     @Override
-    public Expression<BooleanType> complicate() {
-        BooleanType type = this.getType();
+    public IExpression<BooleanType> complicate() {
+        boolean type = this.getType().getValue();
         switch (Helper.randomInt(0, 6)) {
         case 0:
             return new BooleanConstant(type);
@@ -46,7 +46,7 @@ public class BooleanConstant extends ExpressionConstant<BooleanType> {
     }
 
     @Override
-    public Expression<BooleanType> evaluate() {
+    public IExpression<BooleanType> evaluate() {
         return this;
     }
 }

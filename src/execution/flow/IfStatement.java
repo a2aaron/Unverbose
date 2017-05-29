@@ -3,7 +3,7 @@ package execution.flow;
 import java.util.ArrayList;
 
 import execution.CodeBlock;
-import expression.Expression;
+import expression.IExpression;
 import expression.bool.BooleanHelper;
 import types.BooleanType;
 
@@ -14,7 +14,7 @@ import types.BooleanType;
  * @version (a version number or a date)
  */
 public class IfStatement extends FlowControl {
-	public IfStatement(Expression<BooleanType> condition, ArrayList<CodeBlock> codeBlock) {
+	public IfStatement(IExpression<BooleanType> condition, ArrayList<CodeBlock> codeBlock) {
 		super("if", condition, codeBlock);
 	}
 

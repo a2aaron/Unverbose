@@ -3,7 +3,7 @@ package execution;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import expression.Expression;
+import expression.IExpression;
 import expression.ExpressionVariable;
 import helper.ExpressionGenerator;
 import helper.Helper;
@@ -11,9 +11,9 @@ import types.IType;
 import variables.Variable;
 
 public class Return<T extends IType<?>> extends CodeBlock {
-	Expression<T> expression;
+	IExpression<T> expression;
 
-	public Return(Expression<T> expression) {
+	public Return(IExpression<T> expression) {
 		super();
 		this.expression = expression;
 	}
@@ -35,7 +35,7 @@ public class Return<T extends IType<?>> extends CodeBlock {
 	public static <T extends IType<?>> Return<T> randomFromScope(ArrayList<Variable<?>> scope, Class<T> typeClass) {
 	    Variable<T> returnedVariable; 
 	    for (Variable<?> variable : Helper.shuffle(scope)) {
-	        if (typeClass.equals(variable.getClass())) {
+	        if (typeClass.equals(variable.getSignature().getType().getClass())) {
 	            returnedVariable = (Variable<T>) variable;
 	            return new Return<T>(new ExpressionVariable<T>(returnedVariable));
 	        }

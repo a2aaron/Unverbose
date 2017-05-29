@@ -3,7 +3,7 @@ package execution.flow;
 import java.util.ArrayList;
 
 import execution.CodeBlock;
-import expression.Expression;
+import expression.IExpression;
 import helper.Helper;
 import types.BooleanType;
 import variables.Variable;
@@ -16,10 +16,10 @@ import variables.Variable;
  */
 public class FlowControl extends CodeBlock {
 	String keyword;
-	Expression<BooleanType> condition;
+	IExpression<BooleanType> condition;
 	ArrayList<CodeBlock> codeBlock;
 
-	public FlowControl(String keyword, Expression<BooleanType> condition2, ArrayList<CodeBlock> codeBlock) {
+	public FlowControl(String keyword, IExpression<BooleanType> condition2, ArrayList<CodeBlock> codeBlock) {
 		this.keyword = keyword;
 		this.condition = condition2;
 		this.codeBlock = codeBlock;

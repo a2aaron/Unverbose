@@ -1,6 +1,6 @@
 package expression.integer;
 
-import expression.Expression;
+import expression.IExpression;
 import expression.IExpression;
 import expression.Operator;
 import types.IntegerType;
@@ -11,7 +11,7 @@ public interface IntegerOperator extends Operator<IntegerType, IntegerType, Inte
 	}
 
 	@Override
-	public default Expression<IntegerType> apply(IExpression<IntegerType> left, IExpression<IntegerType> right) {
+	public default IExpression<IntegerType> apply(IExpression<IntegerType> left, IExpression<IntegerType> right) {
 		int result = apply(left.getType().getValue().intValue(), right.getType().getValue().intValue());
 		return new IntegerConstant(new IntegerType(result));
 	}

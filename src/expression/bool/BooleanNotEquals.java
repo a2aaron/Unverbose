@@ -1,6 +1,6 @@
 package expression.bool;
 
-import expression.Expression;
+import expression.IExpression;
 import expression.ExpressionTwoOp;
 import expression.IExpression;
 import expression.Operator;
@@ -19,7 +19,7 @@ import types.IntegerType;
 public class BooleanNotEquals extends ExpressionTwoOp<IntegerType, IntegerType, BooleanType> {
 	static final Operator<IntegerType, IntegerType, BooleanType> operator = new Operator<IntegerType, IntegerType, BooleanType>() {
 		@Override
-		public Expression<BooleanType> apply(IExpression<IntegerType> left, IExpression<IntegerType> right) {
+		public IExpression<BooleanType> apply(IExpression<IntegerType> left, IExpression<IntegerType> right) {
 			if (!left.getType().equals(right.getType())) {
 				return new BooleanConstant(true);
 			} else {
@@ -31,16 +31,16 @@ public class BooleanNotEquals extends ExpressionTwoOp<IntegerType, IntegerType, 
 	/**
 	 * Constructor for objects of class BooleanEquals
 	 */
-	public BooleanNotEquals(Expression<IntegerType> left, Expression<IntegerType> right) {
+	public BooleanNotEquals(IExpression<IntegerType> left, IExpression<IntegerType> right) {
 		super(left, right, operator, "!=");
 	}
 
 	@Override
-	public Expression<BooleanType> complicate() {
+	public IExpression<BooleanType> complicate() {
 		switch (Helper.randomInt(0, 2)) {
 		case 0: {
-			Expression<IntegerType> newLeft = getLeft();
-			Expression<IntegerType> newRight = getRight();
+			IExpression<IntegerType> newLeft = getLeft();
+			IExpression<IntegerType> newRight = getRight();
 			if (Helper.random.nextBoolean()) {
 				newLeft = Addition.random(newLeft.getType());
 			}
@@ -76,8 +76,8 @@ public class BooleanNotEquals extends ExpressionTwoOp<IntegerType, IntegerType, 
 		}
 	}
 
-    public static Expression<BooleanType> randomEqualTo(BooleanType type) {
-        if (type.getValue().booleanValue()) {
+    public static IExpression<BooleanType> randomEqualTo(boolean value) {
+        if (value) {
             return randomTrue();
         } else {
             return randomFalse();

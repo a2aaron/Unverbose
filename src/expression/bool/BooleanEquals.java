@@ -1,6 +1,6 @@
 package expression.bool;
 
-import expression.Expression;
+import expression.IExpression;
 import expression.ExpressionTwoOp;
 import expression.IExpression;
 import expression.Operator;
@@ -19,7 +19,7 @@ import types.IntegerType;
 public class BooleanEquals extends ExpressionTwoOp<IntegerType, IntegerType, BooleanType> {
 	static final Operator<IntegerType, IntegerType, BooleanType> operator = new Operator<IntegerType, IntegerType, BooleanType>() {
 		@Override
-		public Expression<BooleanType> apply(IExpression<IntegerType> left, IExpression<IntegerType> right) {
+		public IExpression<BooleanType> apply(IExpression<IntegerType> left, IExpression<IntegerType> right) {
 			if (left.getType().getValue().equals(right.getType().getValue())) {
 				return new BooleanConstant(true);
 			} else {
@@ -31,16 +31,16 @@ public class BooleanEquals extends ExpressionTwoOp<IntegerType, IntegerType, Boo
 	/**
 	 * Constructor for objects of class BooleanEquals
 	 */
-	public BooleanEquals(Expression<IntegerType> left, Expression<IntegerType> right) {
+	public BooleanEquals(IExpression<IntegerType> left, IExpression<IntegerType> right) {
 		super(left, right, operator, "==");
 	}
 
 	@Override
-	public Expression<BooleanType> complicate() {
+	public IExpression<BooleanType> complicate() {
 		switch (Helper.randomInt(0, 2)) {
 		case 0: {
-			Expression<IntegerType> newLeft = getLeft();
-			Expression<IntegerType> newRight = getRight();
+			IExpression<IntegerType> newLeft = getLeft();
+			IExpression<IntegerType> newRight = getRight();
 			if (Helper.random.nextBoolean()) {
 				newLeft = Addition.random(newLeft.getType());
 			}
@@ -71,13 +71,13 @@ public class BooleanEquals extends ExpressionTwoOp<IntegerType, IntegerType, Boo
 	}
 
 	public static BooleanEquals randomTrue() {
-		Expression<IntegerType> left = IntegerConstant.random();
-		Expression<IntegerType> right = new IntegerConstant(left.getType());
+		IExpression<IntegerType> left = IntegerConstant.random();
+		IExpression<IntegerType> right = new IntegerConstant(left.getType());
 		return new BooleanEquals(left, right);
 	}
 
-    public static Expression<BooleanType> randomEqualTo(BooleanType type) {
-        if (type.getValue().booleanValue()) {
+    public static IExpression<BooleanType> randomEqualTo(boolean value) {
+        if (value) {
             return randomTrue();
         } else {
             return randomFalse();

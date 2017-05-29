@@ -2,16 +2,16 @@ package execution;
 
 import java.util.ArrayList;
 
-import expression.Expression;
+import expression.IExpression;
 import helper.ExpressionGenerator;
 import types.IType;
 import variables.Variable;
 
 public class DeclarationAssignment<T extends IType<?>> extends CodeBlock {
 	Variable<T> variable;
-	Expression<T> expression;
+	IExpression<T> expression;
 
-	public DeclarationAssignment(Variable<T> variable, Expression<T> expression) {
+	public DeclarationAssignment(Variable<T> variable, IExpression<T> expression) {
 		this.variable = variable;
 		this.expression = expression;
 	}
@@ -33,7 +33,7 @@ public class DeclarationAssignment<T extends IType<?>> extends CodeBlock {
 
 	public static <T extends IType<?>> DeclarationAssignment<T> random(Class<T> typeClass) {
 		Variable<T> variable = Variable.random(typeClass);
-		Expression<T> expression = ExpressionGenerator.random(typeClass);
+		IExpression<T> expression = ExpressionGenerator.random(typeClass);
 		return new DeclarationAssignment<T>(variable, expression);
 	}
 }
