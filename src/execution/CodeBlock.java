@@ -2,6 +2,7 @@ package execution;
 
 import java.util.ArrayList;
 
+import execution.flow.IfStatement;
 import expression.IExpression;
 import helper.Helper;
 import types.IType;
@@ -19,7 +20,7 @@ public abstract class CodeBlock {
 	public abstract String toString();
 
 	public static CodeBlock random(ArrayList<Variable<?>> scope) {
-		switch (Helper.randomInt(0, 3)) {
+		switch (Helper.randomInt(0, 4)) {
 		case 0:
             if (!scope.isEmpty()) {
                 Variable<?> variable = (Variable<?>) Helper.getRandomElement(scope.toArray());
@@ -34,6 +35,8 @@ public abstract class CodeBlock {
             }
 		case 2:
 			return Declaration.random(IType.randomClass());
+		case 3:
+		    return IfStatement.random(scope);
 		default:
 			throw new RuntimeException("Unreachable!");
 		}

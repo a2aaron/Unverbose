@@ -1,16 +1,12 @@
 
 import java.util.ArrayList;
 
-import execution.CodeBlock;
-import execution.DeclarationAssignment;
 import expression.IExpression;
 import expression.bool.BooleanConstant;
+import expression.integer.IntegerConstant;
 import function.Function;
-import function.Getter;
-import function.Setter;
-import types.BooleanType;
 import types.IFunctionType;
-import types.IType;
+import types.IntegerType;
 import variables.Variable;
 
 /**
@@ -23,6 +19,7 @@ public class Main {
 	public static void main(String args[]) {
 		System.out.println("");
 		BooleanConstant booleanTrue = new BooleanConstant(true);
+		IExpression<IntegerType> constant = new IntegerConstant(new IntegerType(5));
 		ArrayList<Variable<?>> scope2 = new ArrayList<Variable<?>>();
 		for (int i = 0; i < 100; i++) {
 //			Class<? extends IType<?>> typeClass = IType.randomClass();
@@ -34,6 +31,8 @@ public class Main {
 //			System.out.println(booleanTrue);
 //			CodeBlock random = CodeBlock.random(scope2);
 //			random.execute(scope2);
+//		    constant = constant.complicate();
+//		    System.out.println(constant);
 			System.out.println(Function.random(IFunctionType.randomClass()));
 		}
 		System.out.println("E");

@@ -1,13 +1,12 @@
 package expression.bool;
 
 import expression.IExpression;
-import expression.IExpression;
 import expression.Operator;
 import types.BooleanType;
 
 public interface BooleanOperator extends Operator<BooleanType, BooleanType, BooleanType> {
 	public enum BooleanOperators {
-		TRUE, FALSE, EQUALS, NOT_EQUALS, AND, OR, NOT,
+		EQUALS, NOT_EQUALS, AND, OR, NOT,
 	}
 
 	@Override

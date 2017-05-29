@@ -6,6 +6,7 @@ import execution.CodeBlock;
 import execution.Declaration;
 import execution.DeclarationAssignment;
 import execution.Return;
+import execution.flow.FlowControl;
 import expression.ExpressionConstant;
 import helper.Helper;
 import signatures.FunctionSignature;
@@ -100,7 +101,7 @@ public class Function<T extends IFunctionType<?>> {
 
 	@Override
 	public String toString() {
-		String string = functionSignature.toString() + " " + functionName + "(";
+	    String string = functionSignature.toString() + " " + functionName + "(";
 		for (int i = 0; i < parameters.size(); i++) {
 			string += parameters.get(i).toString();
 			if (i != parameters.size() - 1) {
@@ -108,11 +109,37 @@ public class Function<T extends IFunctionType<?>> {
 			}
 		}
 		string += ") {\n";
+		
+		int indentLevel = 1;
 		for (CodeBlock codeBlock : codeBlocks) {
-			string += "\t" + codeBlock.toString() + "\n";
+		    string += toStringCodeBlock(codeBlock, indentLevel);
 		}
 		string += "}";
 		return string;
+	}
+	
+	public String indent(int num) {
+	    String string = "";
+	    for (int i = 0; i < num; i++) {
+	        string += "\t";
+	    }
+	    return string; 
+	}
+	
+	public String toStringCodeBlock(CodeBlock codeBlock, int indentLevel) {
+	    String string = "";
+        if (codeBlock instanceof FlowControl) {
+            string += indent(indentLevel) + ((FlowControl) codeBlock).headerString();
+            indentLevel += 1;
+            for (CodeBlock innerCodeBlock : ((FlowControl) codeBlock).getCodeBlocks()) {
+                string += toStringCodeBlock(innerCodeBlock, indentLevel);
+            }
+            indentLevel -= 1;
+            string += indent(indentLevel) + "}\n";
+        } else {
+            string += indent(indentLevel) + codeBlock.toString() + "\n";
+        }
+        return string;
 	}
 
 	public static <T extends IFunctionType<?>> Function<T> random(Class<T> typeClass) {

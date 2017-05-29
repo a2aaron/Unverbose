@@ -1,8 +1,6 @@
 package execution;
 
 import java.util.ArrayList;
-import java.util.Collections;
-
 import expression.IExpression;
 import expression.ExpressionVariable;
 import helper.ExpressionGenerator;

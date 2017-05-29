@@ -24,8 +24,23 @@ public class Subtraction extends ExpressionTwoOp<IntegerType, IntegerType, Integ
     }
 
     public static Subtraction random(int value) {
-        IntegerType left = IntegerType.random();
-        int right = value + left.getValue().intValue();
+        IntegerType right = IntegerType.random();
+        int left = value + right.getValue().intValue();
         return new Subtraction(IntegerHelper.toExpression(left), IntegerHelper.toExpression(right));
+    }
+    
+    @Override
+    public String toString() {
+        String left = getLeft().toString();
+        String right = getRight().toString();
+        
+        if (getLeft() instanceof Subtraction) {
+            left = "(" + left + ")";
+        }
+        
+        if (getRight() instanceof Subtraction) {
+            right = "(" + right + ")";
+        }
+        return left + " - " + right;
     }
 }
