@@ -2,6 +2,7 @@ package expression.integer;
 
 import expression.Expression;
 import expression.IExpression;
+import helper.Helper;
 import types.IntegerType;
 
 /**
@@ -17,7 +18,14 @@ public class IntegerConstant extends Expression<IntegerType> {
 
 	@Override
 	public IExpression<IntegerType> complicate() {
-		return Addition.random(this.getType());
+	    int value = this.getType().getValue().intValue();
+	    switch(Helper.randomInt(0, 2)) {
+	    case 0: return Subtraction.random(value);
+	    case 1: return Addition.random(value);
+	    default:
+	        throw new RuntimeException("Unreachable!");
+	    }
+		
 	}
 
 	@Override

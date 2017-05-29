@@ -29,9 +29,9 @@ public class Addition extends ExpressionTwoOp<IntegerType, IntegerType, IntegerT
 		return new Addition(new IntegerConstant(left), new IntegerConstant(right));
 	}
 
-	public static Addition random(IntegerType value) {
+	public static Addition random(int value) {
 		IntegerType left = IntegerType.random();
-		int right = value.getValue().intValue() - left.getValue().intValue();
+		int right = value - left.getValue().intValue();
 		return new Addition(IntegerHelper.toExpression(left), IntegerHelper.toExpression(right));
 	}
 }

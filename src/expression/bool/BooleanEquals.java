@@ -42,11 +42,11 @@ public class BooleanEquals extends ExpressionTwoOp<IntegerType, IntegerType, Boo
 			IExpression<IntegerType> newLeft = getLeft();
 			IExpression<IntegerType> newRight = getRight();
 			if (Helper.random.nextBoolean()) {
-				newLeft = Addition.random(newLeft.getType());
+				newLeft = Addition.random(newLeft.getType().getValue());
 			}
 
 			if (Helper.random.nextBoolean()) {
-				newRight = Addition.random(newRight.getType());
+				newRight = Addition.random(newRight.getType().getValue());
 			}
 			return new BooleanNotEquals(newLeft, newRight);
 		}
