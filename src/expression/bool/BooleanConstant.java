@@ -1,6 +1,7 @@
 package expression.bool;
 
 import expression.IExpression;
+import expression.bool.BooleanOperator.BooleanOperators;
 import expression.ExpressionConstant;
 import helper.Helper;
 import types.BooleanType;
@@ -12,33 +13,34 @@ import types.BooleanType;
  * @version (a version number or a date)
  */
 public class BooleanConstant extends ExpressionConstant<BooleanType> {
-	public BooleanConstant(boolean value) {
-		super(new BooleanType(value));
-	}
+    public BooleanConstant(boolean value) {
+        super(new BooleanType(value));
+    }
 
-	public BooleanConstant(BooleanType value) {
-		super(value);
-	}
+    public BooleanConstant(BooleanType value) {
+        super(value);
+    }
 
-	public static IExpression<BooleanType> random() {
-		return BooleanHelper.toExpression(types.BooleanType.random());
-	}
+    public static IExpression<BooleanType> random() {
+        return BooleanHelper.toExpression(types.BooleanType.random());
+    }
 
     @Override
     public IExpression<BooleanType> complicate() {
         boolean type = this.getType().getValue();
-        switch (Helper.randomInt(0, 6)) {
-        case 0:
+        if (Helper.random.nextBoolean()) {
             return new BooleanConstant(type);
-        case 1:
+        }
+        switch (Helper.getRandomElement(BooleanOperators.values())) {
+        case NOT:
             return BooleanNot.randomEqualTo(type);
-        case 2:
+        case AND:
             return BooleanAnd.randomEqualTo(type);
-        case 3:
+        case OR:
             return BooleanOr.randomEqualTo(type);
-        case 4:
+        case EQUALS:
             return BooleanEquals.randomEqualTo(type);
-        case 5:
+        case NOT_EQUALS:
             return BooleanNotEquals.randomEqualTo(type);
         default:
             throw new RuntimeException("Unreachable!");
