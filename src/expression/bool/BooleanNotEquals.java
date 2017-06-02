@@ -8,6 +8,7 @@ import expression.integer.IntegerConstant;
 import helper.Helper;
 import types.BooleanType;
 import types.IntegerType;
+import values.IntegerValue;
 
 /**
  * Write a description of class BooleanEquals here.
@@ -19,7 +20,7 @@ public class BooleanNotEquals extends ExpressionTwoOp<IntegerType, IntegerType, 
 	static final Operator<IntegerType, IntegerType, BooleanType> operator = new Operator<IntegerType, IntegerType, BooleanType>() {
 		@Override
 		public IExpression<BooleanType> apply(IExpression<IntegerType> left, IExpression<IntegerType> right) {
-			if (!left.getType().equals(right.getType())) {
+			if (!left.getValue().equals(right.getValue())) {
 				return new BooleanConstant(true);
 			} else {
 				return new BooleanConstant(false);
@@ -41,11 +42,11 @@ public class BooleanNotEquals extends ExpressionTwoOp<IntegerType, IntegerType, 
 			IExpression<IntegerType> newLeft = getLeft();
 			IExpression<IntegerType> newRight = getRight();
 			if (Helper.random.nextBoolean()) {
-				newLeft = Addition.random(newLeft.getType().getValue());
+				newLeft = Addition.random((int) newLeft.getValue().getValue());
 			}
 
 			if (Helper.random.nextBoolean()) {
-				newRight = Addition.random(newRight.getType().getValue());
+				newRight = Addition.random((int) newRight.getValue().getValue());
 			}
 			return new BooleanNotEquals(newLeft, newRight);
 		}
@@ -60,7 +61,7 @@ public class BooleanNotEquals extends ExpressionTwoOp<IntegerType, IntegerType, 
 
 	public static BooleanNotEquals randomFalse() {
 		IntegerConstant left = IntegerConstant.random();
-		IntegerConstant right = new IntegerConstant(left.getType());
+		IntegerConstant right = new IntegerConstant((IntegerValue) left.getValue());
 		return new BooleanNotEquals(left, right);
 	}
 
@@ -69,7 +70,7 @@ public class BooleanNotEquals extends ExpressionTwoOp<IntegerType, IntegerType, 
 			IntegerConstant left = IntegerConstant.random();
 			IntegerConstant right = IntegerConstant.random();
 			BooleanNotEquals equals = new BooleanNotEquals(left, right);
-			if (equals.evaluate().getType().getValue().booleanValue() == true) {
+			if (((Boolean) equals.evaluate().getValue().getValue()).booleanValue() == true) {
 				return equals;
 			}
 		}

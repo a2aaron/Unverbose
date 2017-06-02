@@ -6,7 +6,7 @@ package types;
  * @author (your name)
  * @version (a version number or a date)
  */
-public interface IObjectType<T extends Object> extends IType<T> {
+public interface IObjectType extends IType {
 	public enum ObjectTypes {
 		STRING, OBJECT, SCANNER, FILE;
 	}

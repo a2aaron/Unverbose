@@ -4,8 +4,12 @@ import java.text.MessageFormat;
 
 import helper.Helper;
 import signatures.ISignature;
-import signatures.Signature;
+import signatures.LocalVariableSignature;
+import signatures.ClassVariableSignature;
 import types.IType;
+import values.IValue;
+import values.NullValue;
+import values.UnassignedNullValue;
 
 /**
  * Write a description of class Variable here.
@@ -13,14 +17,26 @@ import types.IType;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Variable<T extends IType<?>> {
-	ISignature<T> signature;
+public class Variable<T extends IType> {
+    ISignature<T> signature;
 	String name;
-
-	public Variable(ISignature<T> signature, String name) {
+    NullValue<?> nullValue;
+    IValue<T, ?> value;
+    
+	public Variable(ISignature<T> signature, String name, IValue<T, ?> value) {
 		this.signature = signature;
 		this.name = name;
+		this.value = value;
+        if (value == null) {
+            nullValue = new NullValue<T>(signature.getType());
+        }
 	}
+	
+    public Variable(ISignature<T> signature, String name) {
+        this.signature = signature;
+        this.name = name;
+        this.nullValue = new UnassignedNullValue<T>(signature.getType());
+    }
 
 	public final String getCanonicalName() {
 		return name;
@@ -34,27 +50,39 @@ public class Variable<T extends IType<?>> {
 		return signature;
 	}
 
-	public void set(T type) {
-		signature.setType(type);
+	public void setValue(IValue<T, ?> value) {
+		this.value = value;
+	}
+	
+	public IValue<T, ?> getValue() {
+	    return value;
 	}
 
+    public NullValue<?> getNullValue() {
+        return nullValue;
+    }
+
+    public void setNullValue(NullValue<?> nullValue) {
+        this.nullValue = nullValue;
+    }
+	
 	public String toDebugString() {
-		return MessageFormat.format("{0} {1} (= {2})", signature, name, signature.getType().getValue());
+		return MessageFormat.format("{0} {1} (= {2})", signature, name, getValue());
 	}
 
 	@Override
 	public String toString() {
-		return MessageFormat.format("{0} {1}", signature, name, signature.getType().getValue());
+		return MessageFormat.format("{0} {1}", signature, name, getValue());
 	}
 
-	public static Variable<?> random() {
-		Signature<?> signature = Signature.random(IType.randomClass());
+	public static Variable<? extends IType> random() {
+	    ClassVariableSignature<?> signature = ClassVariableSignature.random(IType.randomClass());
 		String name = randomName();
 		return new Variable(signature, name);
 	}
 
-	public static <T extends IType<?>> Variable<T> random(Class<T> typeClass) {
-		Signature<T> signature = Signature.random(typeClass);
+	public static <T extends IType> Variable<T> random(Class<T> typeClass) {
+	    ClassVariableSignature<T> signature = ClassVariableSignature.random(typeClass);
 		String name = randomName();
 		return new Variable<T>(signature, name);
 	}

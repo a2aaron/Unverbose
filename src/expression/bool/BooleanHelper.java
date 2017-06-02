@@ -2,6 +2,7 @@ package expression.bool;
 
 import expression.IExpression;
 import types.BooleanType;
+import values.BooleanValue;
 
 /**
  * Write a description of class BooleanExpression here.
@@ -15,10 +16,10 @@ public class BooleanHelper {
 	}
 
     public static IExpression<BooleanType> toExpression(boolean value) {
-        return toExpression(new BooleanType(value));
+        return toExpression(new BooleanValue(value));
     }	
 	
-	public static IExpression<BooleanType> toExpression(BooleanType value) {
+	public static IExpression<BooleanType> toExpression(BooleanValue value) {
 		if (value.getValue().booleanValue() == true) {
 			return new BooleanConstant(true);
 		} else {

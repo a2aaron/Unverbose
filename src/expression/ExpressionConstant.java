@@ -1,9 +1,10 @@
 package expression;
 
 import types.IType;
+import values.IValue;
 
-public class ExpressionConstant<T extends IType<?>> extends Expression<T> implements IExpression<T> {
-	public ExpressionConstant(T value) {
+public class ExpressionConstant<T extends IType> extends Expression<T> implements IExpression<T> {
+	public ExpressionConstant(IValue<T, ?> value) {
 		super(value);
 	}
 
@@ -19,6 +20,6 @@ public class ExpressionConstant<T extends IType<?>> extends Expression<T> implem
 	
 	@Override
 	public String toString() {
-	    return this.getType().getValue().toString();
+	    return this.getValue().toString();
 	}
 }

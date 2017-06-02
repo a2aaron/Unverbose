@@ -29,8 +29,10 @@ public class IfStatement extends FlowControl {
 
     @Override
     public void execute(ArrayList<Variable<?>> scope) {
+        @SuppressWarnings("unchecked")
+        // must be type safe because scope is a ArrayList<Variable<?>> so .clone() should so be a ArrayList<Variable<?>>
         ArrayList<Variable<?>> tempScope = (ArrayList<Variable<?>>) scope.clone();
-        if (condition.evaluate().getType().getValue()) {
+        if ((boolean) condition.evaluate().getValue().getValue()) {
             executeBody(tempScope);
         } else {
             return;

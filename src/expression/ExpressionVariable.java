@@ -1,13 +1,14 @@
 package expression;
 
 import types.IType;
+import values.IValue;
 import variables.Variable;
 
-public class ExpressionVariable<T extends IType<?>> extends Expression<T> {
+public class ExpressionVariable<T extends IType> extends Expression<T> {
 	Variable<T> variable;
 
 	public ExpressionVariable(Variable<T> variable) {
-		super(variable.getSignature().getType());
+		super(variable.getValue());
 		this.variable = variable;
 	}
 

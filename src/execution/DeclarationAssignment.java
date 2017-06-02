@@ -7,7 +7,7 @@ import helper.ExpressionGenerator;
 import types.IType;
 import variables.Variable;
 
-public class DeclarationAssignment<T extends IType<?>> extends CodeBlock {
+public class DeclarationAssignment<T extends IType> extends CodeBlock {
 	Variable<T> variable;
 	IExpression<T> expression;
 
@@ -18,7 +18,7 @@ public class DeclarationAssignment<T extends IType<?>> extends CodeBlock {
 
 	@Override
 	public void execute(ArrayList<Variable<?>> scope) {
-		variable.set(expression.getType());
+		variable.setValue(expression.getValue());
 		scope.add(variable);
 	}
 
@@ -31,7 +31,7 @@ public class DeclarationAssignment<T extends IType<?>> extends CodeBlock {
 		return variable.toString() + " = " + expression.toString() + ";";
 	}
 
-	public static <T extends IType<?>> DeclarationAssignment<T> random(Class<T> typeClass) {
+	public static <T extends IType> DeclarationAssignment<T> random(Class<T> typeClass) {
 		Variable<T> variable = Variable.random(typeClass);
 		IExpression<T> expression = ExpressionGenerator.random(typeClass);
 		return new DeclarationAssignment<T>(variable, expression);

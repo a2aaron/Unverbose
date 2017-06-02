@@ -1,8 +1,9 @@
 package expression.bool;
 
 import expression.IExpression;
-import expression.ExpressionTwoOp;
 import types.BooleanType;
+import values.BooleanValue;
+import expression.ExpressionTwoOp;
 
 public class BooleanExpressionTwoOp extends ExpressionTwoOp<BooleanType, BooleanType, BooleanType> {
     @Deprecated

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import execution.flow.IfStatement;
 import expression.IExpression;
+import helper.ExpressionGenerator;
 import helper.Helper;
 import types.IType;
 import variables.LocalVariable;
@@ -18,21 +19,19 @@ public abstract class CodeBlock {
 
 	@Override
 	public abstract String toString();
-
+	
 	public static CodeBlock random(ArrayList<Variable<?>> scope) {
 		switch (Helper.randomInt(0, 4)) {
 		case 0:
             if (!scope.isEmpty()) {
                 Variable<?> variable = (Variable<?>) Helper.getRandomElement(scope.toArray());
-                return new Assignment(variable,
-                        IExpression.random((Class<? extends IType<?>>) variable.getSignature().getType().getClass()));
+                Class<? extends IType> clazz = (Class<? extends IType>) variable.getSignature().getType().getClass();
+                return new Assignment(variable, ExpressionGenerator.random(clazz));
             }
 		case 1:
-            if (!scope.isEmpty()) {
-                Variable<?> variable = LocalVariable.random();
-                return new DeclarationAssignment(variable,
-                        IExpression.random((Class<? extends IType<?>>) variable.getSignature().getType().getClass()));
-            }
+            Variable<? extends IType> variable = LocalVariable.random();
+            Class<? extends IType> clazz = (Class<? extends IType>) variable.getSignature().getType().getClass();
+            return new DeclarationAssignment(variable, ExpressionGenerator.random(clazz));
 		case 2:
 			return Declaration.random(IType.randomClass());
 		case 3:

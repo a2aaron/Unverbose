@@ -2,7 +2,7 @@ package signatures;
 
 import types.IType;
 
-public interface IClassLevelSignature<T extends IType<?>> extends ISignature<T> {
+public interface IClassLevelSignature extends ISignature {
 	public enum Final {
 		FINAL("final "), NONE("");
 

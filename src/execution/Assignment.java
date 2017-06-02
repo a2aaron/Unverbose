@@ -6,7 +6,7 @@ import expression.IExpression;
 import types.IType;
 import variables.Variable;
 
-public class Assignment<T extends IType<?>> extends CodeBlock {
+public class Assignment<T extends IType> extends CodeBlock {
 
 	Variable<T> variable;
 	IExpression<T> expression;
@@ -19,9 +19,9 @@ public class Assignment<T extends IType<?>> extends CodeBlock {
 	@Override
 	public void execute(ArrayList<Variable<?>> scope) {
 		if (scope.indexOf(variable) == -1) {
-			System.out.println("fuck");
+			throw new RuntimeException(variable + " not in scope!?");
 		}
-		variable.set(expression.getType());
+		variable.setValue(expression.getValue());
 	}
 
 	@Override

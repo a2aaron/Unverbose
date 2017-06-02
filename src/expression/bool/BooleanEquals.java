@@ -8,6 +8,7 @@ import expression.integer.IntegerConstant;
 import helper.Helper;
 import types.BooleanType;
 import types.IntegerType;
+import values.IntegerValue;
 
 /**
  * Write a description of class BooleanEquals here.
@@ -19,7 +20,7 @@ public class BooleanEquals extends ExpressionTwoOp<IntegerType, IntegerType, Boo
 	static final Operator<IntegerType, IntegerType, BooleanType> operator = new Operator<IntegerType, IntegerType, BooleanType>() {
 		@Override
 		public IExpression<BooleanType> apply(IExpression<IntegerType> left, IExpression<IntegerType> right) {
-			if (left.getType().getValue().equals(right.getType().getValue())) {
+			if (left.getValue().getValue().equals(right.getValue().getValue())) {
 				return new BooleanConstant(true);
 			} else {
 				return new BooleanConstant(false);
@@ -41,11 +42,11 @@ public class BooleanEquals extends ExpressionTwoOp<IntegerType, IntegerType, Boo
 			IExpression<IntegerType> newLeft = getLeft();
 			IExpression<IntegerType> newRight = getRight();
 			if (Helper.random.nextBoolean()) {
-				newLeft = Addition.random(newLeft.getType().getValue());
+				newLeft = Addition.random((int) newLeft.getValue().getValue());
 			}
 
 			if (Helper.random.nextBoolean()) {
-				newRight = Addition.random(newRight.getType().getValue());
+				newRight = Addition.random((int) newRight.getValue().getValue());
 			}
 			return new BooleanNotEquals(newLeft, newRight);
 		}
@@ -63,7 +64,7 @@ public class BooleanEquals extends ExpressionTwoOp<IntegerType, IntegerType, Boo
 			IntegerConstant left = IntegerConstant.random();
 			IntegerConstant right = IntegerConstant.random();
 			BooleanEquals equals = new BooleanEquals(left, right);
-			if (equals.evaluate().getType().getValue().booleanValue() == false) {
+			if (((Boolean) equals.evaluate().getValue().getValue()).booleanValue() == false) {
 				return equals;
 			}
 		}
@@ -71,7 +72,7 @@ public class BooleanEquals extends ExpressionTwoOp<IntegerType, IntegerType, Boo
 
 	public static BooleanEquals randomTrue() {
 		IExpression<IntegerType> left = IntegerConstant.random();
-		IExpression<IntegerType> right = new IntegerConstant(left.getType());
+		IExpression<IntegerType> right = new IntegerConstant((IntegerValue) left.getValue());
 		return new BooleanEquals(left, right);
 	}
 

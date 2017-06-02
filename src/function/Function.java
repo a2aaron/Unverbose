@@ -13,6 +13,8 @@ import signatures.FunctionSignature;
 import types.IFunctionType;
 import types.IType;
 import types.VoidType;
+import values.IValue;
+import values.VoidValue;
 import variables.LocalVariable;
 import variables.Variable;
 
@@ -22,7 +24,7 @@ import variables.Variable;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Function<T extends IFunctionType<?>> {
+public class Function<T extends IFunctionType> {
 	FunctionSignature<T> functionSignature;
 	ArrayList<LocalVariable<?>> parameters = new ArrayList<LocalVariable<?>>();
 	String functionName;
@@ -49,7 +51,7 @@ public class Function<T extends IFunctionType<?>> {
 		importedScope.addAll(scope);
 	}
 
-	public T execute(ArrayList<LocalVariable<?>> parameters) {
+	public IValue<T, ?> execute(ArrayList<LocalVariable<?>> parameters) {
 		ArrayList<Variable<?>> scope = new ArrayList<Variable<?>>();
 		scope.addAll(localScope);
 		scope.addAll(importedScope);
@@ -62,7 +64,7 @@ public class Function<T extends IFunctionType<?>> {
 			}
 		}
 		if (this.functionSignature.getType() instanceof VoidType) {
-			return (T) new Return<VoidType>(new ExpressionConstant<VoidType>(new VoidType()));
+			return (IValue<T, ?>) new Return<VoidType>(new ExpressionConstant<VoidType>(new VoidValue())).get();
 		} else {
 			throw new RuntimeException("End of function reached but not a void type!");
 		}
@@ -142,8 +144,8 @@ public class Function<T extends IFunctionType<?>> {
         return string;
 	}
 
-	public static <T extends IFunctionType<?>> Function<T> random(Class<T> typeClass) {
-		FunctionSignature<T> signature = FunctionSignature.randomFunctionSignature(typeClass);
+	public static <T extends IFunctionType> Function<T> random(Class<T> typeClass) {
+		FunctionSignature<T> signature = FunctionSignature.random(typeClass);
 		String functionName = Helper.randomString(10);
 		ArrayList<LocalVariable<?>> parameters = randomParameters(Helper.randomInt(0, 4));
 		ArrayList<CodeBlock> codeBlocks = CodeBlock.randomArrayList(parameters);
@@ -158,7 +160,7 @@ public class Function<T extends IFunctionType<?>> {
 	public static ArrayList<LocalVariable<?>> randomParameters(int amount) {
 		ArrayList<LocalVariable<?>> parameters = new ArrayList<LocalVariable<?>>();
 		for (int i = 0; i < amount; i++) {
-			parameters.add(LocalVariable.random(IType.randomClass()));
+			parameters.add(LocalVariable.random(IType.random()));
 		}
 		return parameters;
 	}

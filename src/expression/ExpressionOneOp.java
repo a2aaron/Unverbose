@@ -2,6 +2,7 @@ package expression;
 
 import helper.Helper;
 import types.IType;
+import values.IValue;
 
 /**
  * The ExpressionOneOp class takes one expression and an operator and applies
@@ -12,7 +13,7 @@ import types.IType;
  * @param <Out>
  *            The returned value
  */
-public class ExpressionOneOp<In extends IType<?>, Out extends IType<?>> extends Expression<Out> {
+public class ExpressionOneOp<In extends IType, Out extends IType> extends Expression<Out> {
 	protected IExpression<In> expression;
 	OneOpOperator<In, Out> operator;
 
@@ -43,8 +44,8 @@ public class ExpressionOneOp<In extends IType<?>, Out extends IType<?>> extends 
 	}
 
 	@Override
-	public Out getType() {
-		return evaluate().getType();
+	public IValue<Out, ?> getValue() {
+		return evaluate().getValue();
 	}
 
 	@Override

@@ -8,27 +8,27 @@ import helper.Helper;
  * @author (your name)
  * @version (a version number or a date)
  */
-public abstract class PrimativeType<T extends Object> extends Type<T> implements IPrimativeType<T>, IFunctionType<T> {
+public abstract class PrimativeType extends Type implements IPrimativeType, IFunctionType {
 	enum PrimativeTypes {
 		INT, BOOLEAN;
 	}
 
-	public PrimativeType(String name, T value) {
-		super(name, value);
+	public PrimativeType(String name) {
+		super(name);
 	}
 
-	public static PrimativeType<?> random() {
+	public static PrimativeType random() {
 		switch (Helper.getRandomElement(PrimativeTypes.values())) {
 		case BOOLEAN:
-			return BooleanType.random();
+			return new BooleanType();
 		case INT:
-			return IntegerType.random();
+			return new IntegerType();
 		default:
 			throw new RuntimeException("Unreachable!");
 		}
 	}
 
-	public static Class<? extends IFunctionType<?>> randomClass() {
+	public static Class<? extends IFunctionType> randomClass() {
 		switch (Helper.getRandomElement(PrimativeTypes.values())) {
 		case BOOLEAN:
 			return BooleanType.class;

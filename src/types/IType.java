@@ -9,20 +9,14 @@ import values.NullValue;
  * @author (your name)
  * @version (a version number or a date)
  */
-public interface IType<T extends Object> {
-	public String getName();
+public interface IType {
+	public String getName();;
 
-	public Object getValue();
-
-	public void setNullValue(NullValue value);
-
-	public void setValue(T value);
-
-	public static <T extends IType<?>> T random() {
-		return (T) random(randomClass());
+	public static IType random() {
+		return random(randomClass());
 	}
 
-	public static <T extends IType<?>> T random(Class<T> clazz) {
+	public static <T extends IType> T random(Class<T> clazz) {
 		if (clazz == BooleanType.class) {
 			return (T) BooleanType.random();
 		} else if (clazz == IntegerType.class) {
@@ -34,7 +28,7 @@ public interface IType<T extends Object> {
 		}
 	}
 
-	public static Class<? extends IType<?>> randomClass() {
+	public static Class<? extends IType> randomClass() {
 		switch (Helper.randomInt(0, 2)) {
 		case 0:
 			return BooleanType.class;

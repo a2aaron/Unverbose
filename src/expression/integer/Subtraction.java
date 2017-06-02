@@ -4,6 +4,7 @@ import expression.ExpressionTwoOp;
 import expression.IExpression;
 import expression.Operator;
 import types.IntegerType;
+import values.IntegerValue;
 
 public class Subtraction extends ExpressionTwoOp<IntegerType, IntegerType, IntegerType> {
     static final Operator<IntegerType, IntegerType, IntegerType> operator = new IntegerOperator() {
@@ -18,13 +19,13 @@ public class Subtraction extends ExpressionTwoOp<IntegerType, IntegerType, Integ
     }
 
     public static Subtraction random() {
-        IntegerType left = IntegerType.random();
-        IntegerType right = IntegerType.random();
+        IntegerValue left = IntegerValue.random();
+        IntegerValue right = IntegerValue.random();
         return new Subtraction(new IntegerConstant(left), new IntegerConstant(right));
     }
 
     public static Subtraction random(int value) {
-        IntegerType right = IntegerType.random();
+        IntegerValue right = IntegerValue.random();
         int left = value + right.getValue().intValue();
         return new Subtraction(IntegerHelper.toExpression(left), IntegerHelper.toExpression(right));
     }

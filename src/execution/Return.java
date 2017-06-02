@@ -6,9 +6,11 @@ import expression.ExpressionVariable;
 import helper.ExpressionGenerator;
 import helper.Helper;
 import types.IType;
+import values.IValue;
+import values.UnassignedNullValue;
 import variables.Variable;
 
-public class Return<T extends IType<?>> extends CodeBlock {
+public class Return<T extends IType> extends CodeBlock {
 	IExpression<T> expression;
 
 	public Return(IExpression<T> expression) {
@@ -21,8 +23,8 @@ public class Return<T extends IType<?>> extends CodeBlock {
 		throw new RuntimeException("Don't execute return methods");
 	}
 
-	public T get() {
-		return expression.getType();
+	public IValue<T, ?> get() {
+		return expression.getValue();
 	}
 
 	@Override
@@ -30,11 +32,19 @@ public class Return<T extends IType<?>> extends CodeBlock {
 		return "return " + expression.toString() + ";";
 	}
 
-	public static <T extends IType<?>> Return<T> randomFromScope(ArrayList<Variable<?>> scope, Class<T> typeClass) {
-	    Variable<T> returnedVariable; 
+	
+    public static <T extends IType> Return<T> randomFromScope(ArrayList<Variable<?>> scope, Class<T> typeClass) {
 	    for (Variable<?> variable : Helper.shuffle(scope)) {
-	        if (typeClass.equals(variable.getSignature().getType().getClass())) {
-	            returnedVariable = (Variable<T>) variable;
+	        boolean unassigned = variable.getValue() instanceof UnassignedNullValue;
+	        if (typeClass.equals(variable.getSignature().getType().getClass()) && !unassigned) {
+	            @SuppressWarnings("unchecked") 
+	            // Guaranteed type safe. Proof:
+	            // the type of variable is Variable<?1 extends IType>
+	            // the type of variable.getSignature().getType().getClass() is Class<?1 extends IType>
+	            // if Class<T extends IType> == Class<?1 extends IType>
+	            // then T == ?1, so
+	            // Variable<T> == Variable<?1>
+	            Variable<T> returnedVariable = (Variable<T>) variable;
 	            return new Return<T>(new ExpressionVariable<T>(returnedVariable));
 	        }
 	    }

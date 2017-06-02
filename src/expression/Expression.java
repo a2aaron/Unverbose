@@ -2,6 +2,7 @@ package expression;
 
 import helper.ExpressionGenerator;
 import types.IType;
+import values.IValue;
 
 /**
  * An IExpression is an object which, at it's core, somehow represents a Value.
@@ -20,32 +21,27 @@ import types.IType;
  * @param <T
  *            extends Type> the type that this expression evaluates to
  */
-public abstract class Expression<T extends IType<?>> implements IExpression<T> {
-	T result;
+public abstract class Expression<T extends IType> implements IExpression<T> {
+	IValue<T, ?> value;
 
 	public Expression() {
 
 	}
 
-	public Expression(T result) {
-		this.result = result;
+	public Expression(IValue<T, ?> value) {
+		this.value = value;
 	}
 
 	public abstract IExpression<T> complicate();
 
 	@Override
     public abstract IExpression<T> evaluate();
-
+	
 	@Override
-    public T getType() {
-		if (result == null) {
-			throw new RuntimeException("result is null");
+    public IValue<T, ?> getValue() {
+		if (value == null) {
+			throw new RuntimeException("Value is null");
 		}
-		return result;
-	}
-
-	@Deprecated
-	public static <T extends IType<?>> IExpression<T> random(Class<T> clazz) {
-		return ExpressionGenerator.random(clazz);
+		return value;
 	}
 }

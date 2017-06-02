@@ -18,7 +18,7 @@ import variables.Variable;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Getter<T extends IFunctionType<?>> extends Function<T> {
+public class Getter<T extends IFunctionType> extends Function<T> {
 	Variable<T> variable;
 
 	public Getter(FunctionSignature<T> signature, InstanceVariable<T> variable) {
@@ -28,10 +28,10 @@ public class Getter<T extends IFunctionType<?>> extends Function<T> {
 	}
 
 	// TODO: Becauase FunctionSignature is broken rn this is untyped
-	public static <T extends IFunctionType<?>> Getter<T> random(Class<T> typeClass) {
-		FunctionSignature<?> signature = new FunctionSignature(Visibility.PUBLIC, Static.NONE, Final.NONE,
+	public static <T extends IFunctionType> Getter<T> random(Class<T> typeClass) {
+		FunctionSignature signature = new FunctionSignature(Visibility.PUBLIC, Static.NONE, Final.NONE,
 				IType.random(typeClass));
-		InstanceVariable<?> variableName = InstanceVariable.random();
+		InstanceVariable variableName = InstanceVariable.random();
 		return new Getter(signature, variableName);
 	}
 }

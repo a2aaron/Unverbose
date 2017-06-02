@@ -5,6 +5,7 @@ import expression.bool.BooleanOperator.BooleanOperators;
 import expression.ExpressionConstant;
 import helper.Helper;
 import types.BooleanType;
+import values.BooleanValue;
 
 /**
  * Write a description of class BooleanConstant here.
@@ -14,20 +15,20 @@ import types.BooleanType;
  */
 public class BooleanConstant extends ExpressionConstant<BooleanType> {
     public BooleanConstant(boolean value) {
-        super(new BooleanType(value));
+        super(new BooleanValue(value));
     }
 
-    public BooleanConstant(BooleanType value) {
+    public BooleanConstant(BooleanValue value) {
         super(value);
     }
 
     public static IExpression<BooleanType> random() {
-        return BooleanHelper.toExpression(types.BooleanType.random());
+        return BooleanHelper.toExpression(BooleanValue.random());
     }
 
     @Override
     public IExpression<BooleanType> complicate() {
-        boolean type = this.getType().getValue();
+        boolean type = ((Boolean) this.getValue().getValue()).booleanValue();
         if (Helper.random.nextBoolean()) {
             return new BooleanConstant(type);
         }

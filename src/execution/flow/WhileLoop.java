@@ -20,8 +20,10 @@ public class WhileLoop extends FlowControl {
     }
     
     public void execute(ArrayList<Variable<?>> scope) {
+        @SuppressWarnings("unchecked")
+        // must be type safe because scope is a ArrayList<Variable<?>> so .clone() should so be a ArrayList<Variable<?>> 
         ArrayList<Variable<?>> tempScope = (ArrayList<Variable<?>>) scope.clone();
-        while (condition.evaluate().getType().getValue()) {
+        while ((boolean) condition.evaluate().getValue().getValue()) {
             execute(tempScope);
         }
     }

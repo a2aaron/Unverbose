@@ -2,6 +2,7 @@ package expression.integer;
 
 import expression.IExpression;
 import types.IntegerType;
+import values.IntegerValue;
 
 /**
  * Write a description of class BooleanExpression here.
@@ -11,10 +12,10 @@ import types.IntegerType;
  */
 public class IntegerHelper {
 	public static IExpression<IntegerType> toExpression(int value) {
-		return new IntegerConstant(new IntegerType(value));
+		return new IntegerConstant(new IntegerValue(value));
 	}
 
-	public static IExpression<IntegerType> toExpression(IntegerType value) {
+	public static IExpression<IntegerType> toExpression(IntegerValue value) {
 		return new IntegerConstant(value);
 	}
 }

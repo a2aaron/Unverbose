@@ -4,6 +4,7 @@ import expression.IExpression;
 import expression.ExpressionTwoOp;
 import expression.Operator;
 import types.IntegerType;
+import values.IntegerValue;
 
 /**
  * Write a description of class Addition here.
@@ -24,13 +25,13 @@ public class Addition extends ExpressionTwoOp<IntegerType, IntegerType, IntegerT
 	}
 
 	public static Addition random() {
-		IntegerType left = IntegerType.random();
-		IntegerType right = IntegerType.random();
+		IntegerValue left = IntegerValue.random();
+		IntegerValue right = IntegerValue.random();
 		return new Addition(new IntegerConstant(left), new IntegerConstant(right));
 	}
 
 	public static Addition random(int value) {
-		IntegerType left = IntegerType.random();
+		IntegerValue left = IntegerValue.random();
 		int right = value - left.getValue().intValue();
 		return new Addition(IntegerHelper.toExpression(left), IntegerHelper.toExpression(right));
 	}

@@ -8,12 +8,12 @@ import helper.Helper;
  * @author (your name)
  * @version (a version number or a date)
  */
-public interface IFunctionType<T extends Object> extends IType<T> {
+public interface IFunctionType extends IType {
 	public enum FunctionTypes {
 		VOID
 	}
 
-	public static <T extends IFunctionType<?>> T random(Class<T> typeClass) {
+	public static <T extends IFunctionType> T random(Class<T> typeClass) {
 		if (typeClass.getSuperclass() == PrimativeType.class) {
 			return (T) PrimativeType.random();
 		} else if (typeClass.getSuperclass() == ObjectType.class) {
@@ -24,7 +24,7 @@ public interface IFunctionType<T extends Object> extends IType<T> {
 		throw new RuntimeException("Unreachable! Class Name: " + typeClass.getCanonicalName());
 	}
 
-	public static Class<? extends IFunctionType<?>> randomClass() {
+	public static Class<? extends IFunctionType> randomClass() {
 		switch (Helper.randomInt(0, 3)) {
 		case 0:
 			return PrimativeType.randomClass();
@@ -36,7 +36,7 @@ public interface IFunctionType<T extends Object> extends IType<T> {
 		}
 	}
 
-	public static Class<? extends IFunctionType<?>> randomNonVoidClass() {
+	public static Class<? extends IFunctionType> randomNonVoidClass() {
 		switch (Helper.randomInt(0, 1)) {
 		case 0:
 			return PrimativeType.randomClass();

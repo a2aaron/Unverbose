@@ -7,6 +7,7 @@ import expression.integer.IntegerConstant;
 import function.Function;
 import types.IFunctionType;
 import types.IntegerType;
+import values.IntegerValue;
 import variables.Variable;
 
 /**
@@ -19,10 +20,10 @@ public class Main {
 	public static void main(String args[]) {
 		System.out.println("");
 		BooleanConstant booleanTrue = new BooleanConstant(true);
-		IExpression<IntegerType> constant = new IntegerConstant(new IntegerType(5));
+		IExpression<IntegerType> constant = new IntegerConstant(new IntegerValue(5));
 		ArrayList<Variable<?>> scope2 = new ArrayList<Variable<?>>();
 		for (int i = 0; i < 100; i++) {
-//			Class<? extends IType<?>> typeClass = IType.randomClass();
+//			Class<? extends IType> typeClass = IType.randomClass();
 //			System.out.println(DeclarationAssignment.random(typeClass));
 //			System.out.println(Variable.random(typeClass));
 //			System.out.println(Getter.random(IFunctionType.randomNonVoidClass()));

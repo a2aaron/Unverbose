@@ -16,7 +16,7 @@ public class BooleanNot extends ExpressionOneOp<BooleanType, BooleanType> {
     static OneOpOperator<BooleanType, BooleanType> operator = new OneOpOperator<BooleanType, BooleanType>() {
         @Override
         public IExpression<BooleanType> apply(IExpression<BooleanType> expression) {
-            if (expression.evaluate().getType().getValue().booleanValue() == true) {
+            if (((Boolean) expression.evaluate().getValue().getValue()).booleanValue() == true) {
                 return new BooleanConstant(false);
             } else {
                 return new BooleanConstant(true);

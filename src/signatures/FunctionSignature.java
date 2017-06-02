@@ -14,33 +14,55 @@ import types.VoidType;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class FunctionSignature<T extends IFunctionType<?>> extends Signature<T> implements ISignature<T> {
+public class FunctionSignature<T extends IType> implements ISignature<T> {
+    T type;
+    Visibility visibility;
+    Static isStatic;
+    Final isFinal;
+    
 	public FunctionSignature(Visibility visibility, Static isStatic, Final isFinal, T type) {
-		super(visibility, isStatic, isFinal, type);
-	}
-
+        this.type = type;
+        this.visibility = visibility;
+        this.isStatic = isStatic;
+        this.isFinal = isFinal;
+    }
+	
 	public FunctionSignature(Visibility visibility, T type) {
-		super(visibility, type);
+		this(visibility, Static.NONE, Final.NONE, type);
 	}
+	
+	public T getType() {
+        return type;
+    }
 
-	public static <T extends IType<?>> Signature<T> random(Class<T> typeClass) {
-		throw new RuntimeException("use randomFunctionSignature");
-	}
+    public Visibility getVisibility() {
+        return visibility;
+    }
 
-	// TODO: figure out how to type parametize this without name clashes
-	public static <T extends IFunctionType<?>> FunctionSignature<T> randomFunctionSignature(Class<T> typeClass) {
-		Visibility visibility = Helper.getRandomElement(Visibility.values());
-		Static isStatic = Helper.getRandomElement(Static.values());
-		Final isFinal = Helper.getRandomElement(Final.values());
-		T type = IFunctionType.random(typeClass);
-		return new FunctionSignature<T>(visibility, isStatic, isFinal, type);
-	}
+    public Static getStatic() {
+        return isStatic;
+    }
 
-	public static FunctionSignature<VoidType> randomVoid() {
-		Visibility visibility = Helper.getRandomElement(Visibility.values());
-		Static isStatic = Helper.getRandomElement(Static.values());
-		Final isFinal = Helper.getRandomElement(Final.values());
-		VoidType type = new VoidType();
-		return new FunctionSignature<VoidType>(visibility, isStatic, isFinal, type);
+    public Final getFinal() {
+        return isFinal;
+    }
+
+    // TODO: figure out how to type parametize this without name clashes
+    public static <T extends IType> FunctionSignature<T> random(Class<T> clazz) {
+        Visibility visibility = Helper.getRandomElement(Visibility.values());
+        Static isStatic = Helper.getRandomElement(Static.values());
+        Final isFinal = Helper.getRandomElement(Final.values());
+        T type = IType.random(clazz);
+        return new FunctionSignature<T>(visibility, isStatic, isFinal, type);
+    }
+    
+    // TODO: figure out how to type parametize this without name clashes
+	public static FunctionSignature<? extends IType> random() {
+		return random(IType.randomClass());
 	}
+	
+	   @Override
+	    public String toString() {
+	        return visibility.getValue() + isStatic.getValue() + isFinal.getValue() + type.getName();
+	    }
 }

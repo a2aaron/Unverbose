@@ -2,6 +2,7 @@ package expression;
 
 import helper.Helper;
 import types.IType;
+import values.IValue;
 
 /**
  * Write a description of class ExpressionTwoOp here.
@@ -9,7 +10,7 @@ import types.IType;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class ExpressionTwoOp<L extends IType<?>, R extends IType<?>, T extends IType<?>> implements IExpression<T> {
+public class ExpressionTwoOp<L extends IType, R extends IType, T extends IType> implements IExpression<T> {
 	IExpression<L> left;
 	IExpression<R> right;
 	Operator<L, R, T> operator;
@@ -60,18 +61,12 @@ public class ExpressionTwoOp<L extends IType<?>, R extends IType<?>, T extends I
 	}
 
 	@Override
-	public T getType() {
-		return evaluate().getType();
+	public IValue<T, ?> getValue() {
+		return evaluate().getValue();
 	}
 
 	@Override
 	public String toString() {
-		if (right == null) {
-			System.out.println("Fuck");
-		}
-		if (left == null) {
-			System.out.println("Fuck");
-		}
 		return left.toString() + " " + symbol + " " + right.toString();
 	}
 }

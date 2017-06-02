@@ -1,26 +1,34 @@
 package signatures;
 
+import helper.Helper;
+import signatures.IClassLevelSignature.Final;
+import signatures.IClassLevelSignature.Static;
+import signatures.IClassLevelSignature.Visibility;
 import types.IType;
 
-public class LocalVariableSignature<T extends IType<?>> implements ISignature<T> {
+/**
+ * Write a description of class Signature here.
+ * 
+ * @author (your name)
+ * @version (a version number or a date)
+ */
+public class LocalVariableSignature<T extends IType> implements ISignature<T> {
 	T type;
 
-	public LocalVariableSignature(T type) {
-		this.type = type;
+	public LocalVariableSignature(T type){ 
+	    this.type = type;
 	}
-
-	@Override
+	
 	public T getType() {
-		return type;
+	    return type;
 	}
 
 	@Override
-	public void setType(T type) {
-		this.type = type;
+	public String toString() {
+		return type.getName();
 	}
 
 	public static LocalVariableSignature<?> random() {
-		IType<?> type = IType.random(IType.randomClass());
-		return new LocalVariableSignature(type);
+		return new LocalVariableSignature(IType.random());
 	}
 }
