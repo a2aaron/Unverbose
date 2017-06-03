@@ -28,10 +28,10 @@ public class Getter<T extends IFunctionType> extends Function<T> {
 	}
 
 	// TODO: Becauase FunctionSignature is broken rn this is untyped
-	public static <T extends IFunctionType> Getter<T> random(Class<T> typeClass) {
-		FunctionSignature signature = new FunctionSignature(Visibility.PUBLIC, Static.NONE, Final.NONE,
-				IType.random(typeClass));
-		InstanceVariable variableName = InstanceVariable.random();
-		return new Getter(signature, variableName);
+	public static <T extends IFunctionType> Getter<T> random(T type) {
+		FunctionSignature<T> signature = new FunctionSignature<T>(Visibility.PUBLIC, Static.NONE, Final.NONE,
+				type);
+		InstanceVariable<T> variableName = InstanceVariable.random(type);
+		return new Getter<T>(signature, variableName);
 	}
 }

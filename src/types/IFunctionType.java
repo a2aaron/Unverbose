@@ -13,15 +13,16 @@ public interface IFunctionType extends IType {
 		VOID
 	}
 
-	public static <T extends IFunctionType> T random(Class<T> typeClass) {
-		if (typeClass.getSuperclass() == PrimativeType.class) {
-			return (T) PrimativeType.random();
-		} else if (typeClass.getSuperclass() == ObjectType.class) {
-			return (T) ObjectType.random();
-		} else if (typeClass == VoidType.class) {
-			return (T) new VoidType();
-		}
-		throw new RuntimeException("Unreachable! Class Name: " + typeClass.getCanonicalName());
+	public static IFunctionType random() {
+        switch (Helper.randomInt(0, 2)) {
+        case 0:
+            return PrimativeType.random();
+        // case 1: // return ObjectType.randomClass(); // TODO
+        case 1:
+            return new VoidType();
+        default:
+            throw new RuntimeException("Unreachable!");
+        }
 	}
 
 	public static Class<? extends IFunctionType> randomClass() {

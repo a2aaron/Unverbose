@@ -7,6 +7,7 @@ import signatures.ISignature;
 import signatures.LocalVariableSignature;
 import signatures.ClassVariableSignature;
 import types.IType;
+import types.VoidType;
 import values.IValue;
 import values.NullValue;
 import values.UnassignedNullValue;
@@ -24,6 +25,9 @@ public class Variable<T extends IType> {
     IValue<T, ?> value;
     
 	public Variable(ISignature<T> signature, String name, IValue<T, ?> value) {
+	    if (signature.getType() instanceof VoidType) {
+	        throw new RuntimeException("cannot make void type variable!");
+	    }
 		this.signature = signature;
 		this.name = name;
 		this.value = value;
@@ -76,13 +80,13 @@ public class Variable<T extends IType> {
 	}
 
 	public static Variable<? extends IType> random() {
-	    ClassVariableSignature<?> signature = ClassVariableSignature.random(IType.randomClass());
+	    ClassVariableSignature<?> signature = ClassVariableSignature.random(IType.random());
 		String name = randomName();
 		return new Variable(signature, name);
 	}
 
-	public static <T extends IType> Variable<T> random(Class<T> typeClass) {
-	    ClassVariableSignature<T> signature = ClassVariableSignature.random(typeClass);
+	public static <T extends IType> Variable<T> random(T type) {
+	    ClassVariableSignature<T> signature = ClassVariableSignature.random(type);
 		String name = randomName();
 		return new Variable<T>(signature, name);
 	}

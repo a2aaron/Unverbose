@@ -19,7 +19,7 @@ public class ExpressionVariable<T extends IType> extends Expression<T> {
 
 	@Override
 	public IExpression<T> evaluate() {
-		throw new RuntimeException("TODO");
+		return new ExpressionConstant<T>(variable.getValue());
 	}
 
 	public Variable<T> getVariable() {

@@ -33,10 +33,10 @@ public class Return<T extends IType> extends CodeBlock {
 	}
 
 	
-    public static <T extends IType> Return<T> randomFromScope(ArrayList<Variable<?>> scope, Class<T> typeClass) {
+    public static <T extends IType> Return<T> randomFromScope(ArrayList<Variable<?>> scope, T type) {
 	    for (Variable<?> variable : Helper.shuffle(scope)) {
 	        boolean unassigned = variable.getValue() instanceof UnassignedNullValue;
-	        if (typeClass.equals(variable.getSignature().getType().getClass()) && !unassigned) {
+	        if (type.equals(variable.getSignature().getType()) && !unassigned) {
 	            @SuppressWarnings("unchecked") 
 	            // Guaranteed type safe. Proof:
 	            // the type of variable is Variable<?1 extends IType>
@@ -48,6 +48,6 @@ public class Return<T extends IType> extends CodeBlock {
 	            return new Return<T>(new ExpressionVariable<T>(returnedVariable));
 	        }
 	    }
-	    return new Return<T>(ExpressionGenerator.random(typeClass));
+	    return new Return<T>(ExpressionGenerator.random(type));
 	}
 }

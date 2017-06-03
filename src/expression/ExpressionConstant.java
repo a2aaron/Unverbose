@@ -15,7 +15,7 @@ public class ExpressionConstant<T extends IType> extends Expression<T> implement
 
 	@Override
 	public IExpression<T> evaluate() {
-		throw new RuntimeException("TODO");
+		return this;
 	}
 	
 	@Override

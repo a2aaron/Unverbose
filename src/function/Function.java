@@ -144,15 +144,15 @@ public class Function<T extends IFunctionType> {
         return string;
 	}
 
-	public static <T extends IFunctionType> Function<T> random(Class<T> typeClass) {
-		FunctionSignature<T> signature = FunctionSignature.random(typeClass);
+	public static <T extends IFunctionType> Function<T> random(T type) {
+		FunctionSignature<T> signature = FunctionSignature.random(type);
 		String functionName = Helper.randomString(10);
 		ArrayList<LocalVariable<?>> parameters = randomParameters(Helper.randomInt(0, 4));
 		ArrayList<CodeBlock> codeBlocks = CodeBlock.randomArrayList(parameters);
 		Function<T> function = new Function<T>(signature, functionName, codeBlocks, parameters);
 
 		if (!(function.getFunctionSignature().getType() instanceof VoidType)) {
-			function.getCodeBlocks().add(Return.randomFromScope(function.getTotalScope(), signature.getType().getClass()));
+			function.getCodeBlocks().add(Return.randomFromScope(function.getTotalScope(), signature.getType()));
 		}
 		return function;
 	}

@@ -34,7 +34,7 @@ public class Main {
 //			random.execute(scope2);
 //		    constant = constant.complicate();
 //		    System.out.println(constant);
-			System.out.println(Function.random(IFunctionType.randomClass()));
+			System.out.println(Function.random(IFunctionType.random()));
 		}
 		System.out.println("E");
 	}

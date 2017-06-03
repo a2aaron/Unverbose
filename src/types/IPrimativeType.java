@@ -6,6 +6,6 @@ package types;
  * @author (your name)
  * @version (a version number or a date)
  */
-public interface IPrimativeType<T extends Object> extends IType {
+public interface IPrimativeType extends IType {
 
 }

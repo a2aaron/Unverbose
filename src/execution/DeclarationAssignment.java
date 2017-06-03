@@ -31,9 +31,9 @@ public class DeclarationAssignment<T extends IType> extends CodeBlock {
 		return variable.toString() + " = " + expression.toString() + ";";
 	}
 
-	public static <T extends IType> DeclarationAssignment<T> random(Class<T> typeClass) {
-		Variable<T> variable = Variable.random(typeClass);
-		IExpression<T> expression = ExpressionGenerator.random(typeClass);
+	public static <T extends IType> DeclarationAssignment<T> random(T type) {
+		Variable<T> variable = Variable.random(type);
+		IExpression<T> expression = ExpressionGenerator.random(type);
 		return new DeclarationAssignment<T>(variable, expression);
 	}
 }

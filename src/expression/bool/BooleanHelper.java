@@ -1,6 +1,7 @@
 package expression.bool;
 
 import expression.IExpression;
+import helper.Helper;
 import types.BooleanType;
 import values.BooleanValue;
 
@@ -12,7 +13,10 @@ import values.BooleanValue;
  */
 public class BooleanHelper {
 	public static IExpression<BooleanType> random() {
-		return BooleanConstant.random();
+	    IExpression<BooleanType> expression = BooleanConstant.random();
+	    for (int i = 0; i < Helper.randomInt(0, 10); i++)
+	        expression = expression.complicate();
+		return expression;
 	}
 
     public static IExpression<BooleanType> toExpression(boolean value) {

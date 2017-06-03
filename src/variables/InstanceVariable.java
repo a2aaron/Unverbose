@@ -13,10 +13,15 @@ public class InstanceVariable<T extends IType> extends Variable<T> {
 	public String getName() {
 		return "this." + super.getName();
 	}
+	
+
+    public static <T extends IType> InstanceVariable<T> random(T type) {
+        ClassVariableSignature<T> signature = ClassVariableSignature.random(type);
+        String name = randomName();
+        return new InstanceVariable<T>(signature, name);
+    }
 
 	public static InstanceVariable<? extends IType> random() {
-		ClassVariableSignature<?> signature = ClassVariableSignature.random(IType.randomClass());
-		String name = randomName();
-		return new InstanceVariable(signature, name);
+		return random(IType.random());
 	}
 }

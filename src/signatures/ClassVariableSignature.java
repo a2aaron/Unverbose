@@ -54,11 +54,10 @@ public class ClassVariableSignature<T extends IType> implements ISignature<T> {
 		return visibility.getValue() + isStatic.getValue() + isFinal.getValue() + type.getName();
 	}
 
-	public static <T extends IType> ClassVariableSignature<T> random(Class<T> clazz) {
+	public static <T extends IType> ClassVariableSignature<T> random(T type) {
 		Visibility visibility = Helper.getRandomElement(Visibility.values());
 		Static isStatic = Helper.getRandomElement(Static.values());
 		Final isFinal = Helper.getRandomElement(Final.values());
-		T type = IType.random(clazz);
 		return new ClassVariableSignature<T>(visibility, isStatic, isFinal, type);
 	}
 }

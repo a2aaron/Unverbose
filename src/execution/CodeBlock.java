@@ -25,15 +25,15 @@ public abstract class CodeBlock {
 		case 0:
             if (!scope.isEmpty()) {
                 Variable<?> variable = (Variable<?>) Helper.getRandomElement(scope.toArray());
-                Class<? extends IType> clazz = (Class<? extends IType>) variable.getSignature().getType().getClass();
-                return new Assignment(variable, ExpressionGenerator.random(clazz));
+                IType type = variable.getSignature().getType();
+                return new Assignment(variable, ExpressionGenerator.random(type));
             }
 		case 1:
             Variable<? extends IType> variable = LocalVariable.random();
-            Class<? extends IType> clazz = (Class<? extends IType>) variable.getSignature().getType().getClass();
-            return new DeclarationAssignment(variable, ExpressionGenerator.random(clazz));
+            IType type = variable.getSignature().getType();
+            return new DeclarationAssignment(variable, ExpressionGenerator.random(type));
 		case 2:
-			return Declaration.random(IType.randomClass());
+			return Declaration.random(IType.random());
 		case 3:
 		    return IfStatement.random(scope);
 		default:

@@ -28,8 +28,8 @@ public class Declaration<T extends IType> extends CodeBlock {
 		return variable.toString() + ";";
 	}
 
-	public static <T extends IType> Declaration<T> random(Class<T> typeClass) {
-		LocalVariable<T> variable = LocalVariable.random(IType.random(typeClass));
+	public static <T extends IType> Declaration<T> random(T type) {
+		LocalVariable<T> variable = LocalVariable.random(type);
 		variable.setNullValue(new UnassignedNullValue<T>(variable.getSignature().getType()));
 		return new Declaration<T>(variable);
 	}

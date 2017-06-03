@@ -48,17 +48,16 @@ public class FunctionSignature<T extends IType> implements ISignature<T> {
     }
 
     // TODO: figure out how to type parametize this without name clashes
-    public static <T extends IType> FunctionSignature<T> random(Class<T> clazz) {
+    public static <T extends IType> FunctionSignature<T> random(T type) {
         Visibility visibility = Helper.getRandomElement(Visibility.values());
         Static isStatic = Helper.getRandomElement(Static.values());
         Final isFinal = Helper.getRandomElement(Final.values());
-        T type = IType.random(clazz);
         return new FunctionSignature<T>(visibility, isStatic, isFinal, type);
     }
     
     // TODO: figure out how to type parametize this without name clashes
 	public static FunctionSignature<? extends IType> random() {
-		return random(IType.randomClass());
+		return random(IType.random());
 	}
 	
 	   @Override
