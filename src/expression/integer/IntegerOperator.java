@@ -7,7 +7,7 @@ import values.IntegerValue;
 
 public interface IntegerOperator extends Operator<IntegerType, IntegerType, IntegerType> {
 	public enum IntegerOperators {
-		TRUE, FALSE, EQUALS, NOT_EQUALS, AND, OR, NOT,
+		ADD, SUBTRACT, MULTIPLY, DIVIDE, MODULO;
 	}
 
 	@Override

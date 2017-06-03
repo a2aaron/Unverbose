@@ -1,8 +1,11 @@
 package helper;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 /**
  * Write a description of class Helper here.
@@ -19,6 +22,9 @@ public class Helper {
 	}
 
 	public static <T> T getRandomElement(T[] array) {
+	    if (array.length == 0) {
+	        throw new RuntimeException("Array is empty!");
+	    }
 		return array[(Helper.randomInt(0, array.length))];
 	}
 
@@ -44,4 +50,26 @@ public class Helper {
 	    Collections.shuffle(output);
 	    return output;
 	}
+
+    public static int randomFactor(int value) {
+        return getRandomElement(factors(value).toArray(new Integer[0]));
+    }
+    
+    public static Collection<Integer> factors(int value) {
+        Collection<Integer> factors = new ArrayList<Integer>();
+        if (value == 0) {
+            return factors;
+        }
+        if (value < 0) {
+            value *= -1;
+        }
+        
+        for (int i = 1; i * i <= value; i++) {
+            if (value % i == 0) {
+                factors.add(i);
+                factors.add(value / i);
+            }
+        }
+        return factors;
+    }
 }
