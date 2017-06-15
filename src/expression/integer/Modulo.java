@@ -14,13 +14,19 @@ public class Modulo extends IntegerTwoOp {
 
     public static Modulo random() {
         IntegerValue left = IntegerValue.random();
-        IntegerValue right = IntegerValue.random();
+        IntegerValue right = IntegerValue.randomNonZero();
         return new Modulo(new IntegerConstant(left), new IntegerConstant(right));
     }
 
     public static Modulo random(int value) {
-        int right = Helper.randomInt(value + 1, 2 * value);
-        int left = value + right * Helper.randomInt(0, 5);
+        if (value == 0) {
+            int left = 0;
+            IntegerValue right = IntegerValue.randomNonZero();
+            return new Modulo(IntegerHelper.toExpression(left), new IntegerConstant(right));
+        }
+        int right = Helper.randomInt(Math.abs(value) + 1, (Math.abs(value) + 1) * 2);
+        int left = value > 0 ? 1 : -1;
+        left *= Math.abs(value) + right * Helper.randomInt(0, 5);
         return new Modulo(IntegerHelper.toExpression(left), IntegerHelper.toExpression(right));
     }
     

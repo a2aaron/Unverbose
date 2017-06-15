@@ -37,10 +37,10 @@ public interface IFunctionType extends IType {
 		}
 	}
 
-	public static Class<? extends IFunctionType> randomNonVoidClass() {
+	public static IFunctionType randomNonVoid() {
 		switch (Helper.randomInt(0, 1)) {
 		case 0:
-			return PrimativeType.randomClass();
+			return PrimativeType.random();
 		case 1: // return ObjectType.randomClass(); // TODO
 		default:
 			throw new RuntimeException("Unreachable!");

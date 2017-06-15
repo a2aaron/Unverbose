@@ -34,6 +34,9 @@ public class Helper {
 	}
 
 	public static int randomInt(int lower, int upper) {
+	    if (upper - lower <= 0) {
+	        throw new RuntimeException("Bad Bound: " + (upper - lower) + " lower: " + lower + " upper: " + upper);
+	    }
 		return random.nextInt(upper - lower) + lower;
 	}
 

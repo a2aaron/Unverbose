@@ -18,16 +18,13 @@ public class Division extends IntegerTwoOp {
 
     public static Division random() {
         IntegerValue left = IntegerValue.random();
-        IntegerValue right = IntegerValue.random();
+        IntegerValue right = IntegerValue.randomNonZero();
         return new Division(new IntegerConstant(left), new IntegerConstant(right));
     }
 
     public static Division random(int value) {
         if (value == 0) {
-            IntegerConstant random = IntegerConstant.random();
-            while ((int) random.getValue().getValue() == 0) {
-                random = IntegerConstant.random();
-            }
+            IntegerConstant random = new IntegerConstant(IntegerValue.randomNonZero());
             return new Division(IntegerHelper.toExpression(0), random);
         }
         boolean isNegative = value < 0; 

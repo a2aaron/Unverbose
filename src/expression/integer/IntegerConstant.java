@@ -20,11 +20,12 @@ public class IntegerConstant extends Expression<IntegerType> {
 	@Override
 	public IExpression<IntegerType> complicate() {
 	    int value = ((Integer) this.getValue().getValue()).intValue();
-	    switch(Helper.randomInt(0, 4)) {
+	    switch(Helper.randomInt(0, 5)) {
 	    case 0: return Subtraction.random(value);
 	    case 1: return Addition.random(value);
 	    case 2: return Multiplication.random(value);
 	    case 3: return Division.random(value);
+	    case 4: return Modulo.random(value);
 	    default:
 	        throw new RuntimeException("Unreachable!");
 	    }

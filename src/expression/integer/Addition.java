@@ -32,4 +32,19 @@ public class Addition extends IntegerTwoOp {
 		int right = value - left.getValue().intValue();
 		return new Addition(IntegerHelper.toExpression(left), IntegerHelper.toExpression(right));
 	}
+	
+    @Override
+    public String toString() {
+        String left = getLeft().toString();
+        String right = getRight().toString();
+        
+        if (!(getLeft() instanceof IntegerConstant || getLeft() instanceof Addition)) {
+            left = "(" + left + ")";
+        }
+        
+        if (!(getRight() instanceof IntegerConstant || getRight() instanceof Addition)) {
+            right = "(" + right + ")";
+        }
+        return left + " + " + right;
+    }
 }
