@@ -2,7 +2,6 @@ package expression.integer;
 
 import expression.ExpressionTwoOp;
 import expression.IExpression;
-import expression.Operator;
 import helper.Helper;
 import types.IntegerType;
 

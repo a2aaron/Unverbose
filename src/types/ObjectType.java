@@ -1,7 +1,6 @@
 package types;
 
 import helper.Helper;
-import values.NullValue;
 
 /**
  * Write a description of class PrimativeType here.

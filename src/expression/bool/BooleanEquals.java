@@ -1,7 +1,7 @@
 package expression.bool;
 
-import expression.IExpression;
 import expression.ExpressionTwoOp;
+import expression.IExpression;
 import expression.Operator;
 import expression.integer.Addition;
 import expression.integer.IntegerConstant;

@@ -1,8 +1,5 @@
 package types;
 
-import values.NullValue;
-import values.UnassignedNullValue;
-
 /**
  * A Type holds a textual name for itself (such as "int") and an actual value
  * for that type.

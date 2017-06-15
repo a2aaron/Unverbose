@@ -2,7 +2,6 @@ package variables;
 
 import signatures.ClassVariableSignature;
 import types.IType;
-import values.IValue;
 
 public class InstanceVariable<T extends IType> extends Variable<T> {
 	public InstanceVariable(ClassVariableSignature<T> signature, String name) {

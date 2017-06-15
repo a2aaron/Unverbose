@@ -3,7 +3,6 @@ package expression.bool;
 import expression.IExpression;
 import helper.Helper;
 import types.BooleanType;
-import values.BooleanValue;
 
 /**
  * Write a description of class BooleanAnd here.

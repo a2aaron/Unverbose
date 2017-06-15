@@ -3,9 +3,7 @@ package helper;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Random;
-import java.util.Set;
 
 /**
  * Write a description of class Helper here.

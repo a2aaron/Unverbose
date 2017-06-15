@@ -1,8 +1,8 @@
 package expression.bool;
 
+import expression.ExpressionConstant;
 import expression.IExpression;
 import expression.bool.BooleanOperator.BooleanOperators;
-import expression.ExpressionConstant;
 import helper.Helper;
 import types.BooleanType;
 import values.BooleanValue;

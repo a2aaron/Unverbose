@@ -1,7 +1,5 @@
 package signatures;
 
-import types.IType;
-
 public interface IClassLevelSignature extends ISignature {
 	public enum Final {
 		FINAL("final "), NONE("");

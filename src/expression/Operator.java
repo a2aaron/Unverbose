@@ -1,7 +1,6 @@
 package expression;
 
 import types.IType;
-import values.IValue;
 
 /**
  * An operator is a symbol which takes two expressions and yeilds a third

@@ -3,9 +3,8 @@ package variables;
 import java.text.MessageFormat;
 
 import helper.Helper;
-import signatures.ISignature;
-import signatures.LocalVariableSignature;
 import signatures.ClassVariableSignature;
+import signatures.ISignature;
 import types.IType;
 import types.VoidType;
 import values.IValue;

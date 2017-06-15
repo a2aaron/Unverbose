@@ -1,8 +1,6 @@
 package expression.integer;
 
-import expression.ExpressionTwoOp;
 import expression.IExpression;
-import expression.Operator;
 import types.IntegerType;
 import values.IntegerValue;
 

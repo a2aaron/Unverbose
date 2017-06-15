@@ -1,9 +1,7 @@
 package expression.bool;
 
-import expression.IExpression;
-import types.BooleanType;
-import values.BooleanValue;
 import expression.ExpressionTwoOp;
+import types.BooleanType;
 
 public class BooleanExpressionTwoOp extends ExpressionTwoOp<BooleanType, BooleanType, BooleanType> {
     public BooleanExpressionTwoOp(boolean left, boolean right, BooleanOperator operator, String symbol) {

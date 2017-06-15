@@ -8,7 +8,6 @@ import signatures.IClassLevelSignature.Final;
 import signatures.IClassLevelSignature.Static;
 import signatures.IClassLevelSignature.Visibility;
 import types.IFunctionType;
-import types.IType;
 import variables.InstanceVariable;
 import variables.Variable;
 

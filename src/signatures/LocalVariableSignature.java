@@ -1,9 +1,5 @@
 package signatures;
 
-import helper.Helper;
-import signatures.IClassLevelSignature.Final;
-import signatures.IClassLevelSignature.Static;
-import signatures.IClassLevelSignature.Visibility;
 import types.IType;
 
 /**

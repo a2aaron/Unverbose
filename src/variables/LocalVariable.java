@@ -1,9 +1,7 @@
 package variables;
 
-import signatures.ClassVariableSignature;
 import signatures.LocalVariableSignature;
 import types.IType;
-import values.IValue;
 
 public class LocalVariable<T extends IType> extends Variable<T> {
 	public LocalVariable(LocalVariableSignature<T> type, String name) {

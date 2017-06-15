@@ -1,7 +1,6 @@
 package expression;
 
 import types.IType;
-import values.IValue;
 import variables.Variable;
 
 public class ExpressionVariable<T extends IType> extends Expression<T> {
