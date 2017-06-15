@@ -6,16 +6,13 @@ import expression.Operator;
 import types.IntegerType;
 import values.IntegerValue;
 
-public class Subtraction extends ExpressionTwoOp<IntegerType, IntegerType, IntegerType> {
-    static final Operator<IntegerType, IntegerType, IntegerType> operator = new IntegerOperator() {
-        @Override
-        public int apply(int left, int right) {
-            return left - right;
-        }
-    };
-
+public class Subtraction extends IntegerTwoOp {
     public Subtraction(IExpression<IntegerType> left, IExpression<IntegerType> right) {
-        super(left, right, operator, "-");
+        super(left, right, IntegerOperators.SUBTRACT);
+    }
+
+    public Subtraction(int left, int right) {
+        this(IntegerHelper.toExpression(left), IntegerHelper.toExpression(right));
     }
 
     public static Subtraction random() {
@@ -35,11 +32,11 @@ public class Subtraction extends ExpressionTwoOp<IntegerType, IntegerType, Integ
         String left = getLeft().toString();
         String right = getRight().toString();
         
-        if (getLeft() instanceof Subtraction) {
+        if (getLeft() instanceof Subtraction || getLeft() instanceof Addition) {
             left = "(" + left + ")";
         }
         
-        if (getRight() instanceof Subtraction) {
+        if (getRight() instanceof Subtraction || getRight() instanceof Addition) {
             right = "(" + right + ")";
         }
         return left + " - " + right;

@@ -60,7 +60,15 @@ public class ExpressionTwoOp<L extends IType, R extends IType, T extends IType> 
 		return right;
 	}
 
-	@Override
+	public Operator<L, R, T> getOperator() {
+        return operator;
+    }
+
+    public String getSymbol() {
+        return symbol;
+    }
+
+    @Override
 	public IValue<T, ?> getValue() {
 		return evaluate().getValue();
 	}

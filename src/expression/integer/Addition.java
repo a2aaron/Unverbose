@@ -12,19 +12,16 @@ import values.IntegerValue;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Addition extends ExpressionTwoOp<IntegerType, IntegerType, IntegerType> {
-	static final Operator<IntegerType, IntegerType, IntegerType> operator = new IntegerOperator() {
-        @Override
-        public int apply(int left, int right) {
-            return left + right;
-        }
-	};
-
+public class Addition extends IntegerTwoOp {
 	public Addition(IExpression<IntegerType> left, IExpression<IntegerType> right) {
-		super(left, right, operator, "+");
+		super(left, right, IntegerOperators.ADD);
 	}
 
-	public static Addition random() {
+	public Addition(int left, int right) {
+        this(IntegerHelper.toExpression(left), IntegerHelper.toExpression(right));
+    }
+
+    public static Addition random() {
 		IntegerValue left = IntegerValue.random();
 		IntegerValue right = IntegerValue.random();
 		return new Addition(new IntegerConstant(left), new IntegerConstant(right));

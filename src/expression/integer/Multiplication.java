@@ -7,16 +7,9 @@ import helper.Helper;
 import types.IntegerType;
 import values.IntegerValue;
 
-public class Multiplication extends ExpressionTwoOp<IntegerType, IntegerType, IntegerType>{
-    static final Operator<IntegerType, IntegerType, IntegerType> operator = new IntegerOperator() {
-        @Override
-        public int apply(int left, int right) {
-            return left * right;
-        }
-    };
-
+public class Multiplication extends IntegerTwoOp {
     public Multiplication(IExpression<IntegerType> left, IExpression<IntegerType> right) {
-        super(left, right, operator, "*");
+        super(left, right, IntegerOperators.MULTIPLY);
     }
 
     public static Multiplication random() {
@@ -46,5 +39,19 @@ public class Multiplication extends ExpressionTwoOp<IntegerType, IntegerType, In
             }
         }    
         return new Multiplication(IntegerHelper.toExpression(left), IntegerHelper.toExpression(right));
+    }
+    
+    @Override
+    public String toString() {
+        String left = getLeft().toString();
+        String right = getRight().toString();
+        if (!(getLeft() instanceof Multiplication) && !(getLeft() instanceof IntegerConstant)) {
+            left = "(" + left + ")";
+        }
+        
+        if (!(getRight() instanceof Multiplication) && !(getRight() instanceof IntegerConstant)) {
+            right = "(" + right + ")";
+        }
+        return left + " * " + right;
     }
 }
