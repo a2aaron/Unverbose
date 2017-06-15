@@ -25,6 +25,9 @@ public class Division extends IntegerTwoOp {
     public static Division random(int value) {
         if (value == 0) {
             IntegerConstant random = IntegerConstant.random();
+            while ((int) random.getValue().getValue() == 0) {
+                random = IntegerConstant.random();
+            }
             return new Division(IntegerHelper.toExpression(0), random);
         }
         boolean isNegative = value < 0; 

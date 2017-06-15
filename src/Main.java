@@ -37,11 +37,11 @@ public class Main {
 //			System.out.println(booleanTrue);
 //			CodeBlock random = CodeBlock.random(scope2);
 //			random.execute(scope2);
-		    constant = constant.complicate();
-		    System.out.println(constant);
+//		    constant = constant.complicate();
+//		    System.out.println(constant);
 //		    System.out.println(new Division(new Subtraction(32, 7), new Addition(25, 5)).complicate());
 //		     System.out.println(new Division(new Subtraction(5, 4), new Addition(5, 3)));
-//			System.out.println(Function.random(IFunctionType.random()));
+			System.out.println(Function.random(IFunctionType.random()));
 		}
 		System.out.println("E");
 	}
