@@ -10,7 +10,7 @@ import types.BooleanType;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class BooleanAnd extends BooleanExpressionTwoOp {
+public class BooleanAnd extends BooleanTwoOp {
 	static final BooleanOperator operator = new BooleanOperator() {
 		@Override
 		public boolean apply(boolean left, boolean right) {

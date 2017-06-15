@@ -18,6 +18,7 @@ import types.IFunctionType;
 import types.IType;
 import types.IntegerType;
 import values.IntegerValue;
+import variables.LocalVariable;
 import variables.Variable;
 
 /**
@@ -31,7 +32,7 @@ public class Main {
 		System.out.println("");
 		IExpression<BooleanType> booleanTrue = new BooleanConstant(true);
 		IExpression<IntegerType> constant = new IntegerConstant(new IntegerValue(5));
-		ArrayList<Variable<?>> scope2 = new ArrayList<Variable<?>>();
+		ArrayList<LocalVariable<?>> scope2 = new ArrayList<LocalVariable<?>>();
 		for (int i = 0; i < 100; i++) {
 			IType type = IType.random();
 //			System.out.println(DeclarationAssignment.random(type));
@@ -44,7 +45,8 @@ public class Main {
 //			random.execute(scope2);
 //		    constant = constant.complicate();
 //		    System.out.println(constant);
-			System.out.println(Function.random(IFunctionType.random()));
+			Function<?> func = Function.random(IFunctionType.random());
+			System.out.println(func);
 		}
 		System.out.println("E");
 	}
