@@ -61,7 +61,7 @@ public class BooleanNotEquals extends ExpressionTwoOp<IntegerType, IntegerType, 
 
 	public static BooleanNotEquals randomFalse() {
 		IntegerConstant left = IntegerConstant.random();
-		IntegerConstant right = new IntegerConstant((IntegerValue) left.getValue());
+		IntegerConstant right = new IntegerConstant(left.getValue());
 		return new BooleanNotEquals(left, right);
 	}
 

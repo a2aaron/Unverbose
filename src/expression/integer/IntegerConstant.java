@@ -12,14 +12,14 @@ import values.IntegerValue;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class IntegerConstant extends Expression<IntegerType> {
+public class IntegerConstant extends Expression<IntegerType> implements IntegerExpression  {
 	public IntegerConstant(IntegerValue value) {
 		super(value);
 	}
 
 	@Override
-	public IExpression<IntegerType> complicate() {
-	    int value = ((Integer) this.getValue().getValue()).intValue();
+	public IntegerExpression complicate() {
+	    int value = this.getValue().getValue().intValue();
 	    switch(Helper.randomInt(0, 5)) {
 	    case 0: return Subtraction.random(value);
 	    case 1: return Addition.random(value);
@@ -31,9 +31,14 @@ public class IntegerConstant extends Expression<IntegerType> {
 	    }
 		
 	}
+	
+	@Override
+	public IntegerValue getValue() {
+	    return (IntegerValue) super.getValue();
+	}
 
 	@Override
-	public IExpression<IntegerType> evaluate() {
+	public IntegerExpression evaluate() {
 		return this;
 	}
 

@@ -4,8 +4,9 @@ import expression.ExpressionTwoOp;
 import expression.IExpression;
 import helper.Helper;
 import types.IntegerType;
+import values.IntegerValue;
 
-public abstract class IntegerTwoOp extends ExpressionTwoOp<IntegerType, IntegerType, IntegerType> {
+public abstract class IntegerTwoOp extends ExpressionTwoOp<IntegerType, IntegerType, IntegerType> implements IntegerExpression {
     public enum IntegerOperators {
         ADD("+", (int left, int right)  -> left + right),
         SUBTRACT("-", (int left, int right)  -> left - right),
@@ -48,7 +49,17 @@ public abstract class IntegerTwoOp extends ExpressionTwoOp<IntegerType, IntegerT
     }
     
     @Override
-    public IExpression<IntegerType> complicate() {
+    public IntegerExpression evaluate() {
+        return (IntegerExpression) super.evaluate();
+    }
+    
+    @Override
+    public IntegerValue getValue() {
+        return (IntegerValue) super.getValue();
+    }
+    
+    @Override
+    public IntegerExpression complicate() {
         switch (Helper.randomInt(0, 1)) {
         case 0: {
             IExpression<IntegerType> newLeft = getLeft();
@@ -75,7 +86,7 @@ public abstract class IntegerTwoOp extends ExpressionTwoOp<IntegerType, IntegerT
         return operationType;
     }
 
-    public static IExpression<IntegerType> integerTwoOpFactory(IExpression<IntegerType> left, IExpression<IntegerType> right, IntegerOperators operator) {
+    public static IntegerExpression integerTwoOpFactory(IExpression<IntegerType> left, IExpression<IntegerType> right, IntegerOperators operator) {
         switch(operator) {
         case ADD:
             return new Addition(left, right);
@@ -92,5 +103,3 @@ public abstract class IntegerTwoOp extends ExpressionTwoOp<IntegerType, IntegerT
         }
     }
 }
-// (1 * 1 / 1) * (3 - -2) * ((1 / 1) / ((-5 - -10) % (-1 - -3))) * (((-13 - 5 % 4) / (9 + -8)) + ((-3 + 0 + (80 - -4)) / (9 / (0 - -1)))) * (( -15   -    -9)    +    1    + (14 % (  2   *     2   ))) * (   (0   / (1 * -5) - 9 * 1) + ((-6 + 26) / (8 + -6)))
-// (1 * 1 / 1) * (3 - -2) * ((1 / 1) / ((-5 - -10) % (-1 - -3))) * (((-13 - 5 % 4) / (9 + -8)) + ((-3 + 0 + (80 - -4)) / (9 / (0 - -1)))) * ((-3 * 5 - (-2 - 7)) + (9 % 2) + (14 % (2 * 1 * (10 % 2)))) * ((-6 * 0 / (1 * -5) - 9 * 1) + ((-6 + 26) / (8 + -6)))

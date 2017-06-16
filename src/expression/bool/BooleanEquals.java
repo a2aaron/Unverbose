@@ -8,6 +8,7 @@ import expression.integer.IntegerConstant;
 import helper.Helper;
 import types.BooleanType;
 import types.IntegerType;
+import values.BooleanValue;
 import values.IntegerValue;
 
 /**
@@ -57,6 +58,11 @@ public class BooleanEquals extends ExpressionTwoOp<IntegerType, IntegerType, Boo
 		default:
 			throw new RuntimeException("Unreachable!");
 		}
+	}
+	
+	@Override
+	public BooleanValue getValue() {
+	    return (BooleanValue) super.getValue();
 	}
 
 	public static BooleanEquals randomFalse() {
