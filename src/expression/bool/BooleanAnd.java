@@ -22,7 +22,7 @@ public class BooleanAnd extends BooleanTwoOp {
         super(left, right, operator, "&&");
     }
 
-	public static IExpression<BooleanType> randomFalse() {
+	public static BooleanExpression randomFalse() {
 		switch (Helper.randomInt(0, 3)) {
 		case 0:
 			return new BooleanAnd(true, false);
@@ -34,11 +34,11 @@ public class BooleanAnd extends BooleanTwoOp {
 		return null;
 	}
 	
-	public static IExpression<BooleanType> randomTrue() {
+	public static BooleanExpression randomTrue() {
 		return new BooleanAnd(true, true);
 	}
 
-    public static IExpression<BooleanType> randomEqualTo(boolean value) {
+    public static BooleanExpression randomEqualTo(boolean value) {
         if (value) {
             return randomTrue();
         } else {

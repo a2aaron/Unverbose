@@ -17,7 +17,7 @@ import values.IntegerValue;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class BooleanEquals extends ExpressionTwoOp<IntegerType, IntegerType, BooleanType> {
+public class BooleanEquals extends ExpressionTwoOp<IntegerType, IntegerType, BooleanType> implements BooleanExpression {
 	static final Operator<IntegerType, IntegerType, BooleanType> operator = new Operator<IntegerType, IntegerType, BooleanType>() {
 		@Override
 		public IExpression<BooleanType> apply(IExpression<IntegerType> left, IExpression<IntegerType> right) {
@@ -64,8 +64,13 @@ public class BooleanEquals extends ExpressionTwoOp<IntegerType, IntegerType, Boo
 	public BooleanValue getValue() {
 	    return (BooleanValue) super.getValue();
 	}
+	
+	@Override
+	public BooleanExpression evaluate() {
+	    return (BooleanExpression) super.evaluate();
+	}
 
-	public static BooleanEquals randomFalse() {
+	public static BooleanExpression randomFalse() {
 		while (true) {
 			IntegerConstant left = IntegerConstant.random();
 			IntegerConstant right = IntegerConstant.random();
@@ -76,13 +81,13 @@ public class BooleanEquals extends ExpressionTwoOp<IntegerType, IntegerType, Boo
 		}
 	}
 
-	public static BooleanEquals randomTrue() {
+	public static BooleanExpression randomTrue() {
 		IExpression<IntegerType> left = IntegerConstant.random();
 		IExpression<IntegerType> right = new IntegerConstant((IntegerValue) left.getValue());
 		return new BooleanEquals(left, right);
 	}
 
-    public static IExpression<BooleanType> randomEqualTo(boolean value) {
+    public static BooleanExpression randomEqualTo(boolean value) {
         if (value) {
             return randomTrue();
         } else {

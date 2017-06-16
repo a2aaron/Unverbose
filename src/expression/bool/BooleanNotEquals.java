@@ -8,6 +8,7 @@ import expression.integer.IntegerConstant;
 import helper.Helper;
 import types.BooleanType;
 import types.IntegerType;
+import values.BooleanValue;
 import values.IntegerValue;
 
 /**
@@ -16,7 +17,7 @@ import values.IntegerValue;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class BooleanNotEquals extends ExpressionTwoOp<IntegerType, IntegerType, BooleanType> {
+public class BooleanNotEquals extends ExpressionTwoOp<IntegerType, IntegerType, BooleanType> implements BooleanExpression {
 	static final Operator<IntegerType, IntegerType, BooleanType> operator = new Operator<IntegerType, IntegerType, BooleanType>() {
 		@Override
 		public IExpression<BooleanType> apply(IExpression<IntegerType> left, IExpression<IntegerType> right) {
@@ -58,7 +59,15 @@ public class BooleanNotEquals extends ExpressionTwoOp<IntegerType, IntegerType, 
 			throw new RuntimeException("Unreachable!");
 		}
 	}
-
+	
+	public BooleanExpression evaluate() {
+	    return (BooleanExpression) super.evaluate();
+	}
+	
+	public BooleanValue getValue() {
+	    return (BooleanValue) super.getValue();
+	}
+	
 	public static BooleanNotEquals randomFalse() {
 		IntegerConstant left = IntegerConstant.random();
 		IntegerConstant right = new IntegerConstant(left.getValue());
@@ -76,7 +85,7 @@ public class BooleanNotEquals extends ExpressionTwoOp<IntegerType, IntegerType, 
 		}
 	}
 
-    public static IExpression<BooleanType> randomEqualTo(boolean value) {
+    public static BooleanExpression randomEqualTo(boolean value) {
         if (value) {
             return randomTrue();
         } else {

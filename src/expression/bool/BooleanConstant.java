@@ -13,7 +13,7 @@ import values.BooleanValue;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class BooleanConstant extends ExpressionConstant<BooleanType> {
+public class BooleanConstant extends ExpressionConstant<BooleanType> implements BooleanExpression {
     public BooleanConstant(boolean value) {
         super(new BooleanValue(value));
     }
@@ -27,7 +27,7 @@ public class BooleanConstant extends ExpressionConstant<BooleanType> {
     }
 
     @Override
-    public IExpression<BooleanType> complicate() {
+    public BooleanExpression complicate() {
         boolean type = ((Boolean) this.getValue().getValue()).booleanValue();
         if (Helper.random.nextBoolean()) {
             return new BooleanConstant(type);
@@ -49,7 +49,12 @@ public class BooleanConstant extends ExpressionConstant<BooleanType> {
     }
 
     @Override
-    public IExpression<BooleanType> evaluate() {
+    public BooleanExpression evaluate() {
         return this;
+    }
+    
+    @Override
+    public BooleanValue getValue() {
+        return (BooleanValue) super.getValue();
     }
 }

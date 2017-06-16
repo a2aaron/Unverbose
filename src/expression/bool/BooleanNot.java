@@ -5,6 +5,7 @@ import expression.IExpression;
 import expression.OneOpOperator;
 import helper.Helper;
 import types.BooleanType;
+import values.BooleanValue;
 
 /**
  * Write a description of class BooleanNot here.
@@ -12,7 +13,7 @@ import types.BooleanType;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class BooleanNot extends ExpressionOneOp<BooleanType, BooleanType> {
+public class BooleanNot extends ExpressionOneOp<BooleanType, BooleanType> implements BooleanExpression {
     static OneOpOperator<BooleanType, BooleanType> operator = new OneOpOperator<BooleanType, BooleanType>() {
         @Override
         public IExpression<BooleanType> apply(IExpression<BooleanType> expression) {
@@ -27,9 +28,17 @@ public class BooleanNot extends ExpressionOneOp<BooleanType, BooleanType> {
     public BooleanNot(IExpression<BooleanType> expression) {
         super(expression, operator);
     }
+    
+    public BooleanValue getValue() {
+        return (BooleanValue) super.getValue();
+    }
+    
+    public BooleanExpression evaluate() {
+        return (BooleanExpression) super.evaluate();
+    }
 
     @Override
-    public IExpression<BooleanType> complicate() {
+    public BooleanExpression complicate() {
         switch (Helper.randomInt(0, 2)) {
         case 0:
         case 1:
@@ -51,15 +60,15 @@ public class BooleanNot extends ExpressionOneOp<BooleanType, BooleanType> {
         }
     }
 
-    public static IExpression<BooleanType> randomFalse() {
+    public static BooleanNot randomFalse() {
         return new BooleanNot(new BooleanConstant(true));
     }
 
-    public static IExpression<BooleanType> randomTrue() {
+    public static BooleanNot randomTrue() {
         return new BooleanNot(new BooleanConstant(false));
     }
 
-    public static IExpression<BooleanType > randomEqualTo(boolean value) {
+    public static BooleanNot randomEqualTo(boolean value) {
         if (value) {
             return randomTrue();
         } else {
